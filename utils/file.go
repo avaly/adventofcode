@@ -9,7 +9,7 @@ import (
 func ReadFile(input string) []string {
   file, err := os.Open(input)
   if err != nil {
-    fmt.Println("Err")
+    fmt.Println("Error opening file: " + input)
   }
   defer file.Close()
 
