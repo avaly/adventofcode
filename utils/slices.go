@@ -17,3 +17,11 @@ func AddToSet[T comparable](set []T, value T) []T {
 
 	return set
 }
+
+func RemoveManyByIndex[T any](items []T, from int, to int) []T {
+	return append(items[:from], items[to+1:]...)
+}
+
+func RemoveOneByIndex[T any](items []T, index int) []T {
+	return append(items[:index], items[index+1:]...)
+}
