@@ -1,4 +1,4 @@
-package day05
+package day07
 
 import (
 	"adventofcode/aoc2022/utils"
