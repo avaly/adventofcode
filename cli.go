@@ -9,6 +9,7 @@ import (
 	day06 "adventofcode/aoc2022/06"
 	day07 "adventofcode/aoc2022/07"
 	day08 "adventofcode/aoc2022/08"
+	day09 "adventofcode/aoc2022/09"
 	"os"
 )
 
@@ -25,6 +26,7 @@ func main() {
         "06": day06.Run,
         "07": day07.Run,
         "08": day08.Run,
+        "09": day09.Run,
     }
 
     runner, ok := days[day]
