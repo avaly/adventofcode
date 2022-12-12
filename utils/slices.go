@@ -35,3 +35,11 @@ func ConvertToString(items []int) []string {
 	}
 	return result
 }
+
+func MapSlice[T, U any](input []T, f func(T, int) U) []U {
+	result := make([]U, len(input))
+	for i := range input {
+		result[i] = f(input[i], i)
+	}
+	return result
+}
