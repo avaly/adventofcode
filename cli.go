@@ -16,35 +16,37 @@ import (
 	day13 "adventofcode/aoc2022/13"
 	day14 "adventofcode/aoc2022/14"
 	day15 "adventofcode/aoc2022/15"
+	day16 "adventofcode/aoc2022/16"
 	day17 "adventofcode/aoc2022/17"
 	"os"
 )
 
 func main() {
-    day := os.Args[1]
-    input := os.Args[2]
+	day := os.Args[1]
+	input := os.Args[2]
 
-    days := map[string]func (string) {
-        "01": day01.Run,
-        "02": day02.Run,
-        "03": day03.Run,
-        "04": day04.Run,
-        "05": day05.Run,
-        "06": day06.Run,
-        "07": day07.Run,
-        "08": day08.Run,
-        "09": day09.Run,
-        "10": day10.Run,
-        "11": day11.Run,
-        "12": day12.Run,
-        "13": day13.Run,
-        "14": day14.Run,
-        "15": day15.Run,
-        "17": day17.Run,
-    }
+	days := map[string]func(string){
+		"01": day01.Run,
+		"02": day02.Run,
+		"03": day03.Run,
+		"04": day04.Run,
+		"05": day05.Run,
+		"06": day06.Run,
+		"07": day07.Run,
+		"08": day08.Run,
+		"09": day09.Run,
+		"10": day10.Run,
+		"11": day11.Run,
+		"12": day12.Run,
+		"13": day13.Run,
+		"14": day14.Run,
+		"15": day15.Run,
+		"16": day16.Run,
+		"17": day17.Run,
+	}
 
-    runner, ok := days[day]
-    if (ok) {
-        runner(input)
-    }
+	runner, ok := days[day]
+	if ok {
+		runner(input)
+	}
 }

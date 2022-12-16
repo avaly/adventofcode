@@ -1,6 +1,10 @@
 package utils
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 func SliceContains[T comparable](items []T, value T) bool {
 	for _, item := range items {
@@ -13,7 +17,7 @@ func SliceContains[T comparable](items []T, value T) bool {
 }
 
 func AddToSet[T comparable](set []T, value T) []T {
-	if (!SliceContains(set, value)) {
+	if !SliceContains(set, value) {
 		return append(set, value)
 	}
 
@@ -42,4 +46,24 @@ func MapSlice[T, U any](input []T, f func(T, int) U) []U {
 		result[i] = f(input[i], i)
 	}
 	return result
+}
+
+func PrintMatrix(values [][]int) {
+	fmt.Print("     ")
+	for i := range values {
+		fmt.Printf("%4s", strconv.Itoa(i))
+	}
+	fmt.Println("")
+
+	fmt.Println(strings.Repeat("----", len(values)+1) + "-")
+
+	for i, items := range values {
+		fmt.Printf("%4s:", strconv.Itoa(i))
+		for _, item := range items {
+			fmt.Printf("%4s", strconv.Itoa(item))
+		}
+		fmt.Println("")
+	}
+
+	fmt.Println(strings.Repeat("----", len(values)+1) + "-")
 }
