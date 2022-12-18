@@ -18,6 +18,7 @@ import (
 	day15 "adventofcode/aoc2022/15"
 	day16 "adventofcode/aoc2022/16"
 	day17 "adventofcode/aoc2022/17"
+	day18 "adventofcode/aoc2022/18"
 	"os"
 )
 
@@ -43,6 +44,7 @@ func main() {
 		"15": day15.Run,
 		"16": day16.Run,
 		"17": day17.Run,
+		"18": day18.Run,
 	}
 
 	runner, ok := days[day]

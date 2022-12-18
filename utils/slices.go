@@ -49,13 +49,13 @@ func MapSlice[T, U any](input []T, f func(T, int) U) []U {
 }
 
 func PrintMatrix(values [][]int) {
-	fmt.Print("     ")
-	for i := range values {
-		fmt.Printf("%4s", strconv.Itoa(i))
-	}
-	fmt.Println("")
+	// fmt.Print("     ")
+	// for i := range values {
+	// 	fmt.Printf("%4s", strconv.Itoa(i))
+	// }
+	// fmt.Println("")
 
-	fmt.Println(strings.Repeat("----", len(values)+1) + "-")
+	// fmt.Println(strings.Repeat("----", len(values)+1) + "-")
 
 	for i, items := range values {
 		fmt.Printf("%4s:", strconv.Itoa(i))
