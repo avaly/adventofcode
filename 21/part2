@@ -1,0 +1,38 @@
+cczh: sllz + lgvd
+ptdq: humn - dvpt
+dvpt: 3
+lfqf: 4
+humn: X
+ljgn: 2
+sllz: 4
+pppw: cczh / lfqf
+lgvd: ljgn * ptdq
+
+
+pppw = 150
+cczh / 4 = 150
+cczh = 150 * 4
+cczh = 600
+4 + lgvd = 600
+lgvd = 600 - 4
+lgvd = 596
+2 * ptdq = 596
+ptdq = 596 / 2
+ptdq = 298
+humn - 3 = 298
+humn = 298 + 3
+humn = 301
+
+100 + 20 = 120
+100 - 20 = 80
+100 / 20 = 5
+100 * 20 = 2000
+
+X = V NOP N
+Y = V NOP N
+
+N = X * 11
+X = N / 11
+
+3 * X = 51928434600306
+X = 5192... / 3
