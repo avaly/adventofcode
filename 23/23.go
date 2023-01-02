@@ -25,6 +25,11 @@ const INF = 999
 func Run(input string) {
 	lines := utils.ReadFile(input)
 
+	fmt.Printf("Part 1: %v\n", SolveGeneric(lines, 10))
+	fmt.Printf("Part 2: %v\n", SolveGeneric(lines, 10000))
+}
+
+func Read(lines []string) [][2]int {
 	elves := [][2]int{}
 
 	for y, line := range lines {
@@ -34,39 +39,50 @@ func Run(input string) {
 			}
 		}
 	}
-	PrintBoard(elves)
 
-	fmt.Printf("Part 1: %v\n", SolvePart1(elves))
-	// fmt.Printf("Part 2: %v\n", SolvePart2(monkeys))
+	return elves
 }
 
-func SolvePart1(elves [][2]int) int {
+func SolveGeneric(lines []string, maxRounds int) int {
+	elves := Read(lines)
+
+	PrintBoard(elves)
+
 	count := len(elves)
 	move := 0
-	// moves := make([]int, count)
 	proposals := make([][2]int, count)
+	finalRound := 0
 
-	for r := 0; r < 10; r++ {
+	for r := 0; r < maxRounds; r++ {
 		for i := range elves {
 			if IsAlone(elves, i) {
+				proposals[i] = [2]int{INF, INF}
 				continue
 			}
 
-			// proposal, err := FindEmpty(elves, i, moves[i])
 			proposal, err := FindEmpty(elves, i, move)
-			// fmt.Println(i, elves[i], move, proposal)
 
 			if err == nil {
 				proposals[i] = proposal
 			} else {
 				proposals[i] = [2]int{INF, INF}
 			}
-
-			// moves[i] = (moves[i] + 1) % 4
 		}
 		move = (move + 1) % 4
 
-		// fmt.Println(proposals)
+		moved := false
+
+		for i := range elves {
+			if proposals[i][0] != INF {
+				moved = true
+				break
+			}
+		}
+
+		if !moved {
+			finalRound = r
+			break
+		}
 
 		for i := range elves {
 			if proposals[i][0] == INF {
@@ -76,6 +92,8 @@ func SolvePart1(elves [][2]int) int {
 				elves[i] = proposals[i]
 			}
 		}
+		// fmt.Println("Round", r+1)
+		// PrintBoard(elves)
 	}
 
 	PrintBoard(elves)
@@ -84,7 +102,11 @@ func SolvePart1(elves [][2]int) int {
 
 	// fmt.Println(borders)
 
-	return (borders[1][0]-borders[0][0]+1)*(borders[1][1]-borders[0][1]+1) - count
+	if maxRounds == 10 {
+		return (borders[1][0]-borders[0][0]+1)*(borders[1][1]-borders[0][1]+1) - count
+	} else {
+		return finalRound + 1
+	}
 }
 
 func IsAlone(elves [][2]int, index int) bool {
@@ -125,7 +147,7 @@ func FindEmpty(elves [][2]int, index int, move int) ([2]int, error) {
 		}
 	}
 
-	return [2]int{0, 0}, fmt.Errorf("Not found")
+	return [2]int{0, 0}, fmt.Errorf("not found")
 }
 
 func DetectBorders(elves [][2]int) [2][2]int {
