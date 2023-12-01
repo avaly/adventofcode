@@ -1,7 +1,10 @@
 use rstest::*;
-use std::cmp::min;
 
 use crate::file::read_file_lines;
+
+const DIGITS_LETTERS: [&str; 9] = [
+    "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+];
 
 fn part1(lines: Vec<String>) -> u32 {
     let mut result = 0;
@@ -32,36 +35,13 @@ fn is_digit(s: &str) -> usize {
         return 1;
     }
 
-    match &s[0..min(3, s.len())] {
-        "one" => 3,
-        "two" => 3,
-        "thr" => match s {
-            "three" => 5,
-            _ => 0,
-        },
-        "fou" => match &s[0..min(4, s.len())] {
-            "four" => 4,
-            _ => 0,
-        },
-        "fiv" => match &s[0..min(4, s.len())] {
-            "five" => 4,
-            _ => 0,
-        },
-        "six" => 3,
-        "sev" => match s {
-            "seven" => 5,
-            _ => 0,
-        },
-        "eig" => match s {
-            "eight" => 5,
-            _ => 0,
-        },
-        "nin" => match &s[0..min(4, s.len())] {
-            "nine" => 4,
-            _ => 0,
-        },
-        _ => 0,
+    for letters in DIGITS_LETTERS {
+        if s.starts_with(letters) {
+            return letters.len();
+        }
     }
+
+    return 0;
 }
 
 fn replace_letters(s: &str) -> String {
