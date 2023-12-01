@@ -1,3 +1,4 @@
+use rstest::*;
 use std::cmp::min;
 
 use crate::file::read_file_lines;
@@ -132,4 +133,30 @@ pub fn main(input: &str) {
     println!("Part 1: {}", part1(lines.clone()));
 
     println!("Part 2: {}", part2(lines));
+}
+
+#[rstest]
+#[case("pqr3stu8vwx", 38)]
+#[case("1abc2", 12)]
+#[case("a1b2c3d4e5f", 15)]
+#[case("treb7uchet", 77)]
+#[case("six3fqrvmrcrspsix7ptsseight", 37)]
+fn test_part1(#[case] line: &str, #[case] expected_value: u32) {
+    assert_eq!(part1(vec![String::from(line)]), expected_value);
+}
+
+#[rstest]
+#[case("two1nine", 29)]
+#[case("eighthree", 83)]
+#[case("eightwothree", 83)]
+#[case("abcone2threexyz", 13)]
+#[case("xtwone3four", 24)]
+#[case("4nineeightseven2", 42)]
+#[case("zoneight234", 14)]
+#[case("7pqrstsixteen", 76)]
+#[case("six3fqrvmrcrspsix7ptsseight", 68)]
+#[case("2pqpqgppm63ccptb", 23)]
+#[case("rtdsxdz53seveneightsixzbtrbbm", 56)]
+fn test_part2(#[case] line: &str, #[case] expected_value: u32) {
+    assert_eq!(part2(vec![String::from(line)]), expected_value);
 }

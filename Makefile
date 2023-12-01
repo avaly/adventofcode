@@ -12,6 +12,10 @@ MAKEFLAGS += --silent
 2023:
 	@cd 2023 && cargo build --quiet && ./target/debug/aoc $(call ARGS)
 
+.PHONY: 2023-test
+2023-test:
+	@cd 2023 && cargo watch --exec test
+
 # Source: https://www.thapaliya.com/en/writings/well-documented-makefiles/
 help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-24s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(shell echo $(MAKEFILE_LIST) | sed 's/ /\n/g' | sort | tr '\n' ' ')
