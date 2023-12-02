@@ -16,6 +16,7 @@ name = "aoc"
 version = "1.0.0"
 dependencies = [
  "rand",
+ "regex",
  "rstest",
 ]
 

@@ -1,8 +1,10 @@
 use crate::day_01::run_01;
+use crate::day_02::run_02;
 use crate::guess::sample;
 use std::env;
 
 pub mod day_01;
+pub mod day_02;
 pub mod file;
 pub mod guess;
 pub mod structs;
@@ -20,6 +22,7 @@ fn main() {
 
         match program.as_str() {
             "01" => run_01::main(input),
+            "02" => run_02::main(input),
             "guess" => sample::sample_run(),
             _ => help(),
         }
