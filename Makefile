@@ -14,7 +14,7 @@ MAKEFLAGS += --silent
 
 .PHONY: 2023-test
 2023-test:
-	@cd 2023 && cargo watch --exec 'test -- day_$(call ARGS)::run_$(call ARGS)'
+	@cd 2023 && cargo watch --exec 'test -- --show-output day_$(call ARGS)'
 
 # Source: https://www.thapaliya.com/en/writings/well-documented-makefiles/
 help:  ## Display this help

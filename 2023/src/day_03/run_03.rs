@@ -1,7 +1,5 @@
 use std::collections::HashSet;
 
-use rstest::*;
-
 use crate::file::read_file_body;
 
 const SIZE: usize = 140;
@@ -138,16 +136,22 @@ pub fn main(input: &str) {
     println!("Part 2: {}", part2(data));
 }
 
-#[rstest]
-#[case(include_str!("sample.txt"), 4361)]
-fn test_part1(#[case] contents: &str, #[case] expected_value: i32) {
-    let data = parse_input(String::from(contents));
-    assert_eq!(part1(data), expected_value);
-}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rstest::*;
 
-#[rstest]
-#[case(include_str!("sample.txt"), 467835)]
-fn test_part2(#[case] contents: &str, #[case] expected_value: i32) {
-    let data = parse_input(String::from(contents));
-    assert_eq!(part2(data), expected_value);
+    #[rstest]
+    #[case(include_str!("sample.txt"), 4361)]
+    fn test_part1(#[case] contents: &str, #[case] expected_value: i32) {
+        let data = parse_input(String::from(contents));
+        assert_eq!(part1(data), expected_value);
+    }
+
+    #[rstest]
+    #[case(include_str!("sample.txt"), 467835)]
+    fn test_part2(#[case] contents: &str, #[case] expected_value: i32) {
+        let data = parse_input(String::from(contents));
+        assert_eq!(part2(data), expected_value);
+    }
 }
