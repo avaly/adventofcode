@@ -1,4 +1,3 @@
-use crate::guess::sample;
 use std::env;
 
 pub mod day_01;
@@ -27,7 +26,6 @@ pub mod day_06;
 // pub mod day_24;
 // pub mod day_25;
 pub mod file;
-pub mod guess;
 pub mod matrix;
 pub mod structs;
 
@@ -68,7 +66,6 @@ fn main() {
             // "23" => crate::day_23::run_23::main(input),
             // "24" => crate::day_24::run_24::main(input),
             // "25" => crate::day_25::run_25::main(input),
-            "guess" => sample::sample_run(),
             _ => help(),
         }
     } else {
