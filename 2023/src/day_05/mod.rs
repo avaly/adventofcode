@@ -27,7 +27,7 @@ fn part2(data: Data) -> i32 {
     return result;
 }
 
-pub fn main(input: &str) {
+pub fn solve(input: &str) {
     let contents = read_file_body(input);
     let data = parse_input(contents);
 
