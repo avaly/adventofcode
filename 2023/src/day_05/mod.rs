@@ -1,28 +1,92 @@
-use crate::file::read_file_body;
+use std::{cmp::min, i64::MAX};
 
-#[derive(Clone)]
+use crate::{file::read_file_body, vectors::Parser};
+
+#[derive(Debug, Clone, PartialEq)]
+struct Map {
+    convertors: Vec<(i64, i64, i64)>,
+}
+
+impl Map {
+    fn from(input: &str) -> Self {
+        return Self {
+            convertors: input
+                .lines()
+                .into_iter()
+                .skip(1)
+                .map(|line| {
+                    let values = line.to_vec::<i64>(" ");
+                    return (values[0], values[1], values[2]);
+                })
+                .collect(),
+        };
+    }
+
+    fn convert(&self, value: i64) -> i64 {
+        let mut current = value;
+
+        for (destination, source, size) in &self.convertors {
+            if &current >= source && current <= source + size {
+                current = destination + (current - source);
+                break;
+            }
+        }
+
+        return current;
+    }
+}
+
+#[derive(Debug, Clone)]
 struct Data {
-    value: String,
+    maps: Vec<Map>,
+    seeds: Vec<i64>,
+}
+
+impl Data {
+    fn convert_seed(&self, value: i64) -> i64 {
+        return self.maps.iter().fold(value, |acc, map| map.convert(acc));
+    }
 }
 
 fn parse_input(contents: String) -> Data {
-    let mut data = Data {
-        value: String::from(""),
-    };
+    let sections: Vec<&str> = contents.split("\n\n").collect();
 
-    let lines = contents.lines();
+    let seeds = sections
+        .get(0)
+        .unwrap()
+        .split(": ")
+        .last()
+        .unwrap()
+        .to_vec::<i64>(" ");
 
-    return data;
+    let mut maps: Vec<Map> = Vec::new();
+    for map_input in sections.split_at(1).1 {
+        maps.push(Map::from(map_input));
+    }
+
+    return Data { maps, seeds };
 }
 
-fn part1(data: Data) -> i32 {
-    let mut result = 0;
-
-    return result;
+fn part1(data: Data) -> i64 {
+    return data
+        .seeds
+        .iter()
+        .map(|seed| data.convert_seed(*seed))
+        .min()
+        .unwrap();
 }
 
-fn part2(data: Data) -> i32 {
-    let mut result = 0;
+fn part2(data: Data) -> i64 {
+    let mut result = MAX;
+
+    for chunk in data.seeds.chunks(2) {
+        let start = chunk[0];
+        let size = chunk[1];
+
+        for seed in start..start + size {
+            result = min(result, data.convert_seed(seed));
+        }
+    }
 
     return result;
 }
@@ -42,14 +106,48 @@ mod tests {
     use rstest::*;
 
     #[rstest]
-    #[case(include_str!("sample.txt"), 0)]
-    fn test_part1(#[case] contents: &str, #[case] expected_value: i32) {
+    #[case("seed-to-soil map:\n50 98 2\n52 50 48", Map { convertors: vec![(50, 98, 2), (52, 50, 48)] } )]
+    fn test_map_parse(#[case] input: &str, #[case] expected_value: Map) {
+        assert_eq!(Map::from(input), expected_value);
+    }
+
+    #[rstest]
+    #[case(10, 10)]
+    #[case(49, 49)]
+    #[case(50, 52)]
+    #[case(51, 53)]
+    #[case(79, 81)]
+    #[case(97, 99)]
+    #[case(98, 50)]
+    #[case(99, 51)]
+    fn test_map_convert(#[case] input: i64, #[case] expected_value: i64) {
+        let map = Map {
+            convertors: vec![(50, 98, 2), (52, 50, 48)],
+        };
+        assert_eq!(map.convert(input), expected_value);
+    }
+
+    #[rstest]
+    #[case(79, 82)]
+    #[case(14, 43)]
+    #[case(55, 86)]
+    #[case(13, 35)]
+    fn test_data_convert_seed(#[case] input: i64, #[case] expected_value: i64) {
+        assert_eq!(
+            parse_input(String::from(include_str!("sample.txt"))).convert_seed(input),
+            expected_value
+        );
+    }
+
+    #[rstest]
+    #[case(include_str!("sample.txt"), 35)]
+    fn test_part1(#[case] contents: &str, #[case] expected_value: i64) {
         assert_eq!(part1(parse_input(String::from(contents))), expected_value);
     }
 
     #[rstest]
-    #[case(include_str!("sample.txt"), 0)]
-    fn test_part2(#[case] contents: &str, #[case] expected_value: i32) {
+    #[case(include_str!("sample.txt"), 46)]
+    fn test_part2(#[case] contents: &str, #[case] expected_value: i64) {
         assert_eq!(part2(parse_input(String::from(contents))), expected_value);
     }
 }
