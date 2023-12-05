@@ -1,6 +1,6 @@
 use std::{cmp::min, i64::MAX};
 
-use crate::{file::read_file_body, vectors::Parser};
+use crate::vectors::Parser;
 
 #[derive(Debug, Clone, PartialEq)]
 struct Map {
@@ -91,8 +91,7 @@ fn part2(data: Data) -> i64 {
     return result;
 }
 
-pub fn solve(input: &str) {
-    let contents = read_file_body(input);
+pub fn solve(contents: String) {
     let data = parse_input(contents);
 
     println!("Part 1: {}", part1(data.clone()));

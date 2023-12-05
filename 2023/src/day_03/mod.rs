@@ -127,8 +127,7 @@ fn part2(data: Vec<Vec<i32>>) -> i32 {
     return result;
 }
 
-pub fn main(input: &str) {
-    let contents = read_file_body(input);
+pub fn solve(contents: String) {
     let data = parse_input(contents);
 
     println!("Part 1: {}", part1(data.clone()));

@@ -94,21 +94,24 @@ fn last_digit(s: &str) -> String {
 }
 
 fn part2(lines: Vec<String>) -> u32 {
-    let lines2: Vec<_> = lines
+    let lines2 = lines
         .iter()
         .map(|line| {
-            let first = first_digit(line.as_str());
-            let last = last_digit(line.as_str());
+            let first = first_digit(line);
+            let last = last_digit(line);
 
             format!("{first}{last}")
         })
-        .collect();
+        .collect::<Vec<_>>();
 
     return part1(lines2);
 }
 
-pub fn main(input: &str) {
-    let lines = read_file_lines(input);
+pub fn solve(contents: String) {
+    let lines = contents
+        .lines()
+        .map(|line| String::from(line))
+        .collect::<Vec<_>>();
 
     println!("Part 1: {}", part1(lines.clone()));
 

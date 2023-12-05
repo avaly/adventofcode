@@ -1,11 +1,13 @@
 use std::env;
 
+use file::read_file_body;
+
 pub mod day_01;
 pub mod day_02;
 pub mod day_03;
 pub mod day_04;
 pub mod day_05;
-// pub mod day_06;
+pub mod day_06;
 // pub mod day_07;
 // pub mod day_08;
 // pub mod day_09;
@@ -25,10 +27,10 @@ pub mod day_05;
 // pub mod day_23;
 // pub mod day_24;
 // pub mod day_25;
-pub mod file;
-pub mod vectors;
 pub mod debug;
+pub mod file;
 pub mod structs;
+pub mod vectors;
 
 fn help() {
     println!("Usage: aoc PROGRAM")
@@ -37,16 +39,23 @@ fn help() {
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    if args.len() == 3 {
+    if args.len() == 2 || args.len() == 3 {
         let program = &args[1];
-        let input = &args[2];
+
+        let input = if args.len() == 3 {
+            args[2].clone()
+        } else {
+            format!("src/day_{}/input.txt", program)
+        };
+
+        let contents = read_file_body(input.as_str());
 
         match program.as_str() {
-            "01" => crate::day_01::main(input),
-            "02" => crate::day_02::main(input),
-            "03" => crate::day_03::main(input),
-            "04" => crate::day_04::main(input),
-            "05" => crate::day_05::solve(input),
+            "01" => crate::day_01::solve(contents),
+            "02" => crate::day_02::solve(contents),
+            "03" => crate::day_03::solve(contents),
+            "04" => crate::day_04::solve(contents),
+            "05" => crate::day_05::solve(contents),
             // "06" => crate::day_06::solve(input),
             // "07" => crate::day_07::solve(input),
             // "08" => crate::day_08::solve(input),

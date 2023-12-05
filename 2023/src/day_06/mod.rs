@@ -1,35 +1,28 @@
-use crate::file::read_file_body;
-
-#[derive(Clone)]
+#[derive(Debug, Clone, PartialEq)]
 struct Data {
     value: String,
 }
 
-fn parse_input(contents: String) -> Data {
-    let mut data = Data {
-        value: String::from(""),
-    };
+impl Data {
+    fn from(contents: &str) -> Self {
+        let mut value = String::from("");
 
-    let lines = contents.lines();
+        let lines = contents.lines();
 
-    return data;
+        return Self { value };
+    }
 }
 
-fn part1(data: Data) -> i32 {
-    let mut result = 0;
-
-    return result;
+fn part1(_data: Data) -> i32 {
+    return 0;
 }
 
-fn part2(data: Data) -> i32 {
-    let mut result = 0;
-
-    return result;
+fn part2(_data: Data) -> i32 {
+    return 0;
 }
 
-pub fn solve(input: &str) {
-    let contents = read_file_body(input);
-    let data = parse_input(contents);
+pub fn solve(contents: String) {
+    let data = Data::from(contents.as_str());
 
     println!("Part 1: {}", part1(data.clone()));
 
@@ -42,14 +35,20 @@ mod tests {
     use rstest::*;
 
     #[rstest]
+    #[case("", Data { value: String::from("") })]
+    fn test_parse_input(#[case] contents: &str, #[case] expected_value: Data) {
+        assert_eq!(Data::from(contents), expected_value);
+    }
+
+    #[rstest]
     #[case(include_str!("sample.txt"), 0)]
     fn test_part1(#[case] contents: &str, #[case] expected_value: i32) {
-        assert_eq!(part1(parse_input(String::from(contents))), expected_value);
+        assert_eq!(part1(Data::from(contents)), expected_value);
     }
 
     #[rstest]
     #[case(include_str!("sample.txt"), 0)]
     fn test_part2(#[case] contents: &str, #[case] expected_value: i32) {
-        assert_eq!(part2(parse_input(String::from(contents))), expected_value);
+        assert_eq!(part2(Data::from(contents)), expected_value);
     }
 }

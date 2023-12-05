@@ -72,7 +72,7 @@ fn parse_game(line: String) -> Game {
     return result;
 }
 
-fn part1(lines: Vec<String>) -> u32 {
+fn part1(lines: Vec<&str>) -> u32 {
     return lines
         .iter()
         .filter_map(|line| {
@@ -86,7 +86,7 @@ fn part1(lines: Vec<String>) -> u32 {
         .sum();
 }
 
-fn part2(lines: Vec<String>) -> u32 {
+fn part2(lines: Vec<&str>) -> u32 {
     return lines
         .iter()
         .filter_map(|line| {
@@ -96,8 +96,8 @@ fn part2(lines: Vec<String>) -> u32 {
         .sum();
 }
 
-pub fn main(input: &str) {
-    let lines = read_file_lines(input);
+pub fn solve(input: String) {
+    let lines = input.lines().collect::<Vec<_>>();
 
     println!("Part 1: {}", part1(lines.clone()));
 

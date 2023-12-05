@@ -1,9 +1,6 @@
 use std::collections::HashSet;
 
-use crate::file::read_file_body;
-
-#[derive(Debug)]
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 struct Card {
     numbers: Vec<u8>,
     winners: HashSet<u8>,
@@ -17,10 +14,22 @@ impl Card {
 
         let mut winners = HashSet::new();
 
-        all_numbers.get(0).unwrap().split_ascii_whitespace().map(|item| item.parse::<u8>().unwrap()).for_each(|item| { winners.insert(item); });
+        all_numbers
+            .get(0)
+            .unwrap()
+            .split_ascii_whitespace()
+            .map(|item| item.parse::<u8>().unwrap())
+            .for_each(|item| {
+                winners.insert(item);
+            });
 
         return Self {
-            numbers: all_numbers.get(1).unwrap().split_ascii_whitespace().map(|item| item.parse::<u8>().unwrap()).collect(),
+            numbers: all_numbers
+                .get(1)
+                .unwrap()
+                .split_ascii_whitespace()
+                .map(|item| item.parse::<u8>().unwrap())
+                .collect(),
             winners,
         };
     }
@@ -50,16 +59,13 @@ impl Card {
     }
 }
 
-#[derive(Debug)]
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 struct Data {
     cards: Vec<Card>,
 }
 
 fn parse_input(contents: &str) -> Data {
-    let mut data = Data {
-        cards: Vec::new(),
-    };
+    let mut data = Data { cards: Vec::new() };
 
     let lines = contents.lines();
     for line in lines {
@@ -87,8 +93,7 @@ fn part2(data: Data) -> i32 {
     return totals.iter().sum();
 }
 
-pub fn main(input: &str) {
-    let contents = read_file_body(input);
+pub fn solve(contents: String) {
     let data = parse_input(contents.as_str());
 
     println!("Part 1: {}", part1(data.clone()));
