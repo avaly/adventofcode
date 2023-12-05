@@ -1,7 +1,5 @@
 use rstest::*;
 
-use crate::file::read_file_lines;
-
 const DIGITS_LETTERS: [&str; 9] = [
     "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 ];

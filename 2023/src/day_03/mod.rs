@@ -1,7 +1,5 @@
 use std::collections::HashSet;
 
-use crate::file::read_file_body;
-
 const SIZE: usize = 140;
 
 fn parse_input(contents: String) -> Vec<Vec<i32>> {

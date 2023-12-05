@@ -1,6 +1,11 @@
-use std::{cmp::min, i64::MAX};
+use std::{
+    cmp::{max, min},
+    i64::MAX,
+};
 
 use crate::vectors::Parser;
+
+type Range = (i64, i64);
 
 #[derive(Debug, Clone, PartialEq)]
 struct Map {
@@ -34,6 +39,61 @@ impl Map {
 
         return current;
     }
+
+    fn convert_range(&self, mut ranges: Vec<Range>) -> Vec<Range> {
+        let mut result: Vec<Range> = Vec::new();
+
+        for (destination, source, size) in self.convertors.iter() {
+            let source_range = (*source, source + size);
+
+            let mut new_ranges: Vec<Range> = Vec::new();
+
+            while ranges.len() > 0 {
+                let range = ranges.pop().unwrap();
+
+                // Case 1:
+                // [range.0                                          range.1)
+                //            [source_range.0      source_range.1)
+
+                // Case 2:
+                //                     [range.0                      range.1)
+                // [source_range.0                 source_range.1)
+
+                // Case 3:
+                //                                   [range.0        range.1)
+                // [source_range.0  source_range.1)
+
+                // Case 4:
+                // [range.0                         range.1)
+                //              [source_range.0               source_range.1)
+
+                // Case 5:
+                // [range.0         range.1)
+                //                           [source_range.0  source_range.1)
+
+                let before = (range.0, min(source_range.0, range.1));
+                let middle = (max(range.0, source_range.0), min(source_range.1, range.1));
+                let after = (max(range.0, source_range.1), range.1);
+
+                if before.0 < before.1 {
+                    new_ranges.push(before);
+                }
+                if middle.0 < middle.1 {
+                    result.push((
+                        middle.0 - source + destination,
+                        middle.1 - source + destination,
+                    ))
+                }
+                if after.0 < after.1 {
+                    new_ranges.push(after);
+                }
+            }
+            ranges = new_ranges;
+        }
+
+        result.append(&mut ranges);
+        return result;
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -45,6 +105,17 @@ struct Data {
 impl Data {
     fn convert_seed(&self, value: i64) -> i64 {
         return self.maps.iter().fold(value, |acc, map| map.convert(acc));
+    }
+
+    fn convert_range(&self, range: Range) -> Range {
+        let mut ranges = vec![range];
+
+        for map in self.maps.iter() {
+            ranges = map.convert_range(ranges);
+        }
+        ranges.sort();
+
+        return ranges[0];
     }
 }
 
@@ -80,12 +151,9 @@ fn part2(data: Data) -> i64 {
     let mut result = MAX;
 
     for chunk in data.seeds.chunks(2) {
-        let start = chunk[0];
-        let size = chunk[1];
+        let range = (chunk[0], chunk[0] + chunk[1]);
 
-        for seed in start..start + size {
-            result = min(result, data.convert_seed(seed));
-        }
+        result = result.min(data.convert_range(range).0);
     }
 
     return result;

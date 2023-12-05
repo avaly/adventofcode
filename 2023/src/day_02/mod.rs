@@ -3,8 +3,6 @@ use std::cmp;
 use regex::Regex;
 use rstest::*;
 
-use crate::file::read_file_lines;
-
 #[derive(Debug)]
 struct Cubes {
     red: u8,
