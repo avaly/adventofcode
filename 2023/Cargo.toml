@@ -7,5 +7,6 @@ edition = "2021"
 
 [dependencies]
 indicatif = {version = "0.17.7", features = ["rayon"]}
+num = "0.4.1"
 regex = "1.10.2"
 rstest = "0.18.2"

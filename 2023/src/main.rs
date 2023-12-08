@@ -9,7 +9,7 @@ pub mod day_04;
 pub mod day_05;
 pub mod day_06;
 pub mod day_07;
-// pub mod day_08;
+pub mod day_08;
 // pub mod day_09;
 // pub mod day_10;
 // pub mod day_11;
@@ -58,7 +58,7 @@ fn main() {
             "05" => crate::day_05::solve(contents),
             "06" => crate::day_06::solve(contents),
             "07" => crate::day_07::solve(contents),
-            // "08" => crate::day_08::solve(contents),
+            "08" => crate::day_08::solve(contents),
             // "09" => crate::day_09::solve(contents),
             // "10" => crate::day_10::solve(contents),
             // "11" => crate::day_11::solve(contents),

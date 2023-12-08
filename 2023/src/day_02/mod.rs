@@ -94,8 +94,8 @@ fn part2(lines: Vec<&str>) -> u32 {
         .sum();
 }
 
-pub fn solve(input: String) {
-    let lines = input.lines().collect::<Vec<_>>();
+pub fn solve(contents: String) {
+    let lines = contents.lines().collect::<Vec<_>>();
 
     println!("Part 1: {}", part1(lines.clone()));
 
