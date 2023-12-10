@@ -16,6 +16,12 @@ MAKEFLAGS += --silent
 2023-test:
 	@cd 2023 && cargo watch --exec 'test -- --show-output day_$(call ARGS)'
 
+2023-prepare:
+	mkdir 2023/src/day_$(call ARGS)
+	cp 2023/src/day_template.rs 2023/src/day_$(call ARGS)/mod.rs
+	touch 2023/src/day_$(call ARGS)/input.txt
+	touch 2023/src/day_$(call ARGS)/sample.txt
+
 # Source: https://www.thapaliya.com/en/writings/well-documented-makefiles/
 help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-24s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(shell echo $(MAKEFILE_LIST) | sed 's/ /\n/g' | sort | tr '\n' ' ')

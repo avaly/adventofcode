@@ -1,4 +1,35 @@
-pub fn dbg_matrix(data: &Vec<Vec<u32>>) {
+pub fn dbg_matrix_as_slice(data: &mut [&mut [usize]]) {
+    let size_y = data.len();
+    let size_x = data[0].len();
+
+    // print!("      ");
+    // for x in 0..size_x {
+    //     print!("{: >1} ", x);
+    // }
+    // println!("");
+
+    print!("------");
+    for _ in 0..size_x {
+        print!("-");
+    }
+    println!("");
+
+    for y in 0..size_y {
+        print!("{: >3} | ", y);
+        for x in 0..size_x {
+            print!("{}", data[y][x]);
+        }
+        println!("");
+    }
+
+    print!("------");
+    for _ in 0..size_x {
+        print!("-");
+    }
+    println!("");
+}
+
+pub fn dbg_matrix_as_vec(data: &Vec<Vec<u32>>) {
     let size = data.get(0).unwrap().len();
 
     print!("      ");
