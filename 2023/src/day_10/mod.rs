@@ -198,6 +198,7 @@ impl Data {
         next
     }
 
+    #[allow(dead_code)]
     fn debug(&self) {
         // print!("      ");
         // for x in 0..self.max_x {
