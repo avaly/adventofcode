@@ -1,4 +1,6 @@
-pub fn dbg_matrix_as_slice(data: &mut [&mut [usize]]) {
+use std::fmt::Display;
+
+pub fn dbg_matrix_as_slice<T: Display>(data: &mut [&mut [T]]) {
     let size_y = data.len();
     let size_x = data[0].len();
 
