@@ -31,7 +31,7 @@ pub fn dbg_matrix_as_slice<T: Display>(data: &mut [&mut [T]]) {
     println!("");
 }
 
-pub fn dbg_matrix_as_vec(data: &Vec<Vec<u32>>) {
+pub fn dbg_matrix_as_vec<T: Display>(data: &Vec<Vec<T>>) {
     let size = data.get(0).unwrap().len();
 
     print!("      ");
