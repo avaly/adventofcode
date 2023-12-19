@@ -9,11 +9,11 @@ impl Data {
     }
 }
 
-fn part1(_data: Data) -> i64 {
+fn part1(_data: Data) -> usize {
     return 0;
 }
 
-fn part2(_data: Data) -> i64 {
+fn part2(_data: Data) -> usize {
     return 0;
 }
 
@@ -37,13 +37,13 @@ mod tests {
 
     #[rstest]
     #[case(include_str!("sample.txt"), 0)]
-    fn test_part1(#[case] contents: &str, #[case] expected_value: i64) {
+    fn test_part1(#[case] contents: &str, #[case] expected_value: usize) {
         assert_eq!(part1(Data::from(contents)), expected_value);
     }
 
     #[rstest]
     #[case(include_str!("sample.txt"), 0)]
-    fn test_part2(#[case] contents: &str, #[case] expected_value: i64) {
+    fn test_part2(#[case] contents: &str, #[case] expected_value: usize) {
         assert_eq!(part2(Data::from(contents)), expected_value);
     }
 }

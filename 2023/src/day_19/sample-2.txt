@@ -1,0 +1,6 @@
+step1{m>3999:A,R}
+step22{a<2:A,R}
+in{s<2:step1,step2}
+step2{x>3999:step22,R}
+
+{x=787,m=2655,a=1222,s=2876}
