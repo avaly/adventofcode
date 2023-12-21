@@ -74,7 +74,7 @@ impl Data {
 
         for step in self.steps.iter() {
             for _ in 0..step.length {
-                current = current.neighbor(&step.dir, SIZE, SIZE).unwrap();
+                current = current.neighbor(&step.dir, SIZE, SIZE, false).unwrap();
             }
             nodes.push(current);
             perimeter += step.length as isize;

@@ -41,29 +41,57 @@ pub struct Coordinate {
 }
 
 impl Coordinate {
-    pub fn neighbor(&self, dir: &Direction, max_y: usize, max_x: usize) -> Option<Self> {
+    pub fn neighbor(
+        &self,
+        dir: &Direction,
+        max_y: usize,
+        max_x: usize,
+        wrapping: bool,
+    ) -> Option<Self> {
         Some(match dir {
-            Direction::North if self.y > 0 => Self {
+            Direction::North if !wrapping && self.y > 0 => Self {
                 y: self.y - 1,
                 x: self.x,
             },
-            Direction::South if self.y < max_y - 1 => Self {
+            Direction::North if wrapping => Self {
+                y: if self.y > 0 { self.y - 1 } else { max_y - 1 },
+                x: self.x,
+            },
+            Direction::South if !wrapping && self.y < max_y - 1 => Self {
                 y: self.y + 1,
                 x: self.x,
             },
-            Direction::West if self.x > 0 => Self {
+            Direction::South if wrapping => Self {
+                y: if self.y < max_y - 1 { self.y + 1 } else { 0 },
+                x: self.x,
+            },
+            Direction::West if !wrapping && self.x > 0 => Self {
                 y: self.y,
                 x: self.x - 1,
             },
-            Direction::East if self.x < max_x - 1 => Self {
+            Direction::West if wrapping => Self {
+                y: self.y,
+                x: if self.x > 0 { self.x - 1 } else { max_x - 1 },
+            },
+            Direction::East if !wrapping && self.x < max_x - 1 => Self {
                 y: self.y,
                 x: self.x + 1,
+            },
+            Direction::East if wrapping => Self {
+                y: self.y,
+                x: if self.x < max_x - 1 { self.x + 1 } else { 0 },
             },
             _ => return None,
         })
     }
 
-    pub fn neighbors(&self, max_y: usize, max_x: usize, _diagonal: bool) -> Vec<Coordinate> {
+    pub fn neighbors(
+        &self,
+        max_y: usize,
+        max_x: usize,
+        _diagonal: bool,
+        wrapping: bool,
+    ) -> Vec<Coordinate> {
         let mut result = vec![];
 
         for dir in [
@@ -72,12 +100,18 @@ impl Coordinate {
             Direction::West,
             Direction::East,
         ] {
-            match self.neighbor(&dir, max_y, max_x) {
+            match self.neighbor(&dir, max_y, max_x, wrapping) {
                 Some(item) => result.push(item),
                 None => {}
             }
         }
         result
+    }
+}
+
+impl Display for Coordinate {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{},{}", self.y, self.x)
     }
 }
 
@@ -136,7 +170,33 @@ mod tests {
         #[case] input: (Coordinate, Direction, usize, usize),
         #[case] expected_value: Option<Coordinate>,
     ) {
-        assert_eq!(input.0.neighbor(&input.1, input.2, input.3), expected_value);
+        assert_eq!(
+            input.0.neighbor(&input.1, input.2, input.3, false),
+            expected_value
+        );
+    }
+
+    #[rstest]
+    #[case((Coordinate { y: 0, x: 0 }, Direction::North, 2, 2), Some(Coordinate { y: 1, x: 0 }))]
+    #[case((Coordinate { y: 0, x: 0 }, Direction::South, 2, 2), Some(Coordinate { y: 1, x: 0 }))]
+    #[case((Coordinate { y: 0, x: 0 }, Direction::West, 2, 2), Some(Coordinate { y: 0, x: 1 }))]
+    #[case((Coordinate { y: 0, x: 0 }, Direction::East, 2, 2), Some(Coordinate { y: 0, x: 1 }))]
+    #[case((Coordinate { y: 1, x: 1 }, Direction::North, 3, 3), Some(Coordinate { y: 0, x: 1 }))]
+    #[case((Coordinate { y: 1, x: 1 }, Direction::South, 3, 3), Some(Coordinate { y: 2, x: 1 }))]
+    #[case((Coordinate { y: 1, x: 1 }, Direction::West, 3, 3), Some(Coordinate { y: 1, x: 0 }))]
+    #[case((Coordinate { y: 1, x: 1 }, Direction::East, 3, 3), Some(Coordinate { y: 1, x: 2 }))]
+    #[case((Coordinate { y: 1, x: 1 }, Direction::North, 2, 2), Some(Coordinate { y: 0, x: 1 }))]
+    #[case((Coordinate { y: 1, x: 1 }, Direction::South, 2, 2), Some(Coordinate { y: 0, x: 1 }))]
+    #[case((Coordinate { y: 1, x: 1 }, Direction::West, 2, 2), Some(Coordinate { y: 1, x: 0 }))]
+    #[case((Coordinate { y: 1, x: 1 }, Direction::East, 2, 2), Some(Coordinate { y: 1, x: 0 }))]
+    fn test_coordinate_neighbor_wrapping(
+        #[case] input: (Coordinate, Direction, usize, usize),
+        #[case] expected_value: Option<Coordinate>,
+    ) {
+        assert_eq!(
+            input.0.neighbor(&input.1, input.2, input.3, true),
+            expected_value
+        );
     }
 
     #[rstest]
@@ -147,6 +207,9 @@ mod tests {
         #[case] input: (Coordinate, usize, usize),
         #[case] expected_value: Vec<Coordinate>,
     ) {
-        assert_eq!(input.0.neighbors(input.1, input.2, false), expected_value);
+        assert_eq!(
+            input.0.neighbors(input.1, input.2, false, false),
+            expected_value
+        );
     }
 }
