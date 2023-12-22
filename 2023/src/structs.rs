@@ -115,6 +115,13 @@ impl Display for Coordinate {
     }
 }
 
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy)]
+pub struct Coordinate3D {
+    pub x: usize,
+    pub y: usize,
+    pub z: usize,
+}
+
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub enum Direction {
     None,
