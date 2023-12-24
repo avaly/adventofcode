@@ -122,6 +122,20 @@ pub struct Coordinate3D {
     pub z: usize,
 }
 
+#[derive(Debug, Clone, Copy)]
+pub struct Coordinate3D {
+    pub x: isize,
+    pub y: isize,
+    pub z: isize,
+}
+
+#[derive(Debug, Clone, Copy)]
+pub struct Coordinate3DFloat {
+    pub x: f64,
+    pub y: f64,
+    pub z: f64,
+}
+
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub enum Direction {
     None,
