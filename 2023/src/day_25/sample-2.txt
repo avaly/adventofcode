@@ -1,0 +1,3 @@
+s: u t
+v: u w
+x: v w

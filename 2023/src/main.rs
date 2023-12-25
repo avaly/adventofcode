@@ -26,7 +26,7 @@ pub mod day_21;
 pub mod day_22;
 pub mod day_23;
 pub mod day_24;
-// pub mod day_25;
+pub mod day_25;
 pub mod debug;
 pub mod file;
 pub mod structs;
@@ -75,7 +75,7 @@ fn main() {
             "22" => crate::day_22::solve(contents),
             "23" => crate::day_23::solve(contents),
             "24" => crate::day_24::solve(contents),
-            // "25" => crate::day_25::solve(contents),
+            "25" => crate::day_25::solve(contents),
             _ => help(),
         }
     } else {
