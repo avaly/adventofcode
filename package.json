@@ -1,0 +1,17 @@
+{
+  "name": "advent-of-code-2024",
+  "version": "2024.0.0",
+  "type": "module",
+  "scripts": {
+    "day": "tsx ./utils/runner.ts",
+    "test": "tsx --test --watch"
+  },
+  "devDependencies": {
+    "@types/node": "22.9.3",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2"
+  },
+  "volta": {
+    "node": "22.11.0"
+  }
+}
