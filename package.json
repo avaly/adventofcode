@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "day": "tsx ./utils/runner.ts",
-    "test": "tsx --test --watch"
+    "test": "tsx --test --watch --test-reporter dot"
   },
   "devDependencies": {
     "@types/node": "22.9.3",

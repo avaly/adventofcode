@@ -1,4 +1,4 @@
-function parseInput(input: string[]): [number[], number[]] {
+function parse(input: string[]): [number[], number[]] {
   const list1: number[] = [];
   const list2: number[] = [];
 
@@ -13,7 +13,7 @@ function parseInput(input: string[]): [number[], number[]] {
 
 export function part1(input: string[]): number {
   let result = 0;
-  const [list1, list2] = parseInput(input);
+  const [list1, list2] = parse(input);
 
   list1.sort();
   list2.sort();
@@ -27,7 +27,7 @@ export function part1(input: string[]): number {
 
 export function part2(input: string[]): number {
   let result = 0;
-  const [list1, list2] = parseInput(input);
+  const [list1, list2] = parse(input);
 
   const occurrences: Record<number, number> = {};
 

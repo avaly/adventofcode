@@ -2,7 +2,7 @@ import { strictEqual } from 'node:assert';
 
 import { cases, sample, testsFor } from '../../utils/tests';
 
-testsFor(['2024', '00'], (day, { part1, part2 }) => {
+testsFor(['2024', '02'], (day, { part1, part2 }) => {
   cases( day, [
     [['foo'], 0],
   ], (input, output) => {
