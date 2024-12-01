@@ -37,6 +37,9 @@ MAKEFLAGS += --silent
 	touch 2024/$(call ARGS)/input.txt
 	touch 2024/$(call ARGS)/sample.txt
 
+pretty:
+	prettier **/*.{cjs,js,mjs,ts} --write
+
 # Source: https://www.thapaliya.com/en/writings/well-documented-makefiles/
 help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-24s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(shell echo $(MAKEFILE_LIST) | sed 's/ /\n/g' | sort | tr '\n' ' ')
