@@ -1,8 +1,10 @@
 import { strictEqual } from 'node:assert';
 
+import { isReportSafe, isReportSafeable } from './02';
+
 import { cases, sample, testsFor } from '../../utils/tests';
 
-testsFor(['2024', '02'], (day, { isReportSafe, isReportSafeable, part1, part2 }) => {
+testsFor(['2024', '02'], (day, { part1, part2 }) => {
 	// prettier-ignore
 	cases(
 		day,

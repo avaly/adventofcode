@@ -19,16 +19,17 @@ export function cases<Input, Output>(
 ) {
 	let index = 1;
 	for (const [input, output] of definitions) {
-		test(`${year}-${day} - test #${index}`, async () => {
+		const title = JSON.stringify(input).substring(0, 20);
+		test(`${year}-${day} - #${index} - ${title}`, async () => {
 			await fn(input, output);
 		});
 		index++;
 	}
 }
 
-export function sample([year, day]: Day, fn: (input: string[]) => void) {
-	test(`${year}-${day} - sample`, async () => {
-		const input = readFileSync(`./${year}/${day}/sample.txt`, 'utf-8').trim().split('\n');
+export function sample([year, day]: Day, fn: (input: string[]) => void, fileName = 'sample') {
+	test(`${year}-${day} - ${fileName}`, async () => {
+		const input = readFileSync(`./${year}/${day}/${fileName}.txt`, 'utf-8').trim().split('\n');
 
 		await fn(input);
 	});
