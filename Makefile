@@ -29,6 +29,9 @@ MAKEFLAGS += --silent
 2024-test:
 	@cd 2024 && pnpm test 2024/$(call ARGS)/*.test.ts
 
+2024-test-all:
+	@cd 2024 && pnpm test 2024/**/*.test.ts
+
 2024-prepare:
 	mkdir 2024/$(call ARGS) || true
 	cp 2024/00/00.ts 2024/$(call ARGS)/$(call ARGS).ts

@@ -28,3 +28,11 @@ export function printMatrix<T>(matrix: Matrix<T>, itemWidth = 3) {
 
 	console.log('-'.repeat(itemWidth * (sizeX + 1) + 2));
 }
+
+export function readCharMatrix(input: string[], separator = ''): Matrix<string> {
+	return input.map((line) => line.split(separator));
+}
+
+export function readNumberMatrix(input: string[], separator = ''): Matrix<number> {
+	return input.map((line) => line.split(separator).map(Number));
+}

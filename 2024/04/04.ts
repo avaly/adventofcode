@@ -1,5 +1,5 @@
 import { Coords2D, Matrix, Vector2D } from '../../utils/types';
-import { negativeVector } from '../../utils/utils';
+import { negativeVector, readCharMatrix } from '../../utils/utils';
 
 const NEEDLE1 = 'XMAS'.split('');
 const NEEDLE2 = 'MAS'.split('');
@@ -20,16 +20,6 @@ const DIRECTIONS2: Vector2D[] = [
 	[-1, 1],
 	[1, 1],
 ];
-
-function parse(input: string[]): Matrix<string> {
-	const result: Matrix<string> = [];
-
-	for (const line of input) {
-		result.push(line.split(''));
-	}
-
-	return result;
-}
 
 function findAt(
 	matrix: Matrix<string>,
@@ -77,7 +67,7 @@ function count1At(matrix: Matrix<string>, coordinates: Coords2D): number {
 export function part1(input: string[]): number {
 	let result = 0;
 
-	const data = parse(input);
+	const data = readCharMatrix(input);
 
 	for (let y = 0; y < data.length; y++) {
 		for (let x = 0; x < data[y].length; x++) {
@@ -123,7 +113,7 @@ export function part2(input: string[]): number {
 
 	const seen = new Set<string>();
 
-	const data = parse(input);
+	const data = readCharMatrix(input);
 
 	for (let y = 0; y < data.length; y++) {
 		for (let x = 0; x < data[y].length; x++) {
