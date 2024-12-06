@@ -1,5 +1,6 @@
-import { Coords2D, Matrix, Vector2D } from '../../utils/types';
-import { negativeVector, readCharMatrix } from '../../utils/utils';
+import Matrix from '../../utils/Matrix';
+import { Coords2D, Vector2D } from '../../utils/types';
+import { negativeVector } from '../../utils/utils';
 
 const NEEDLE1 = 'XMAS'.split('');
 const NEEDLE2 = 'MAS'.split('');
@@ -28,7 +29,7 @@ function findAt(
 	[dx, dy]: Vector2D,
 	seen?: Set<string>,
 ): boolean {
-	if (matrix[y][x] !== needle[0]) {
+	if (matrix.get([x, y]) !== needle[0]) {
 		return false;
 	}
 
@@ -37,8 +38,8 @@ function findAt(
 
 	let i = 1;
 
-	while (xx >= 0 && xx < matrix[0].length && yy >= 0 && yy < matrix.length) {
-		if (matrix[yy][xx] !== needle[i]) {
+	while (xx >= 0 && xx < matrix.sizeX && yy >= 0 && yy < matrix.sizeY) {
+		if (matrix.get([xx, yy]) !== needle[i]) {
 			break;
 		}
 
@@ -67,10 +68,10 @@ function count1At(matrix: Matrix<string>, coordinates: Coords2D): number {
 export function part1(input: string[]): number {
 	let result = 0;
 
-	const data = readCharMatrix(input);
+	const data = Matrix.toStringMatrix(input);
 
-	for (let y = 0; y < data.length; y++) {
-		for (let x = 0; x < data[y].length; x++) {
+	for (let y = 0; y < data.sizeY; y++) {
+		for (let x = 0; x < data.sizeX; x++) {
 			const count = count1At(data, [x, y]);
 			result += count;
 		}
@@ -113,10 +114,10 @@ export function part2(input: string[]): number {
 
 	const seen = new Set<string>();
 
-	const data = readCharMatrix(input);
+	const data = Matrix.toStringMatrix(input);
 
-	for (let y = 0; y < data.length; y++) {
-		for (let x = 0; x < data[y].length; x++) {
+	for (let y = 0; y < data.sizeY; y++) {
+		for (let x = 0; x < data.sizeX; x++) {
 			result += count2At(data, [x, y], seen);
 		}
 	}
