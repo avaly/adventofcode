@@ -14,3 +14,5 @@ export type VectorDelta = -1 | 0 | 1;
 
 export type Vector2D = [VectorDelta, VectorDelta];
 export type Vector3D = [VectorDelta, VectorDelta, VectorDelta];
+
+export type Orientation = 'north' | 'east' | 'south' | 'west';

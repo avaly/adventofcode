@@ -1,4 +1,8 @@
-import { Day, Matrix, Program, VectorDelta } from './types';
+import { Coords2D, Day, Matrix, Orientation, Program, Vector2D, VectorDelta } from './types';
+
+export function addPositionVector2D(pos: Coords2D, vector: Vector2D): Coords2D {
+	return [pos[0] + vector[0], pos[1] + vector[1]];
+}
 
 export async function loadProgram([year, day]: Day): Promise<Program> {
 	const implementation = await import(`../${year}/${day}/${day}.ts`);
@@ -33,6 +37,12 @@ export function readCharMatrix(input: string[], separator = ''): Matrix<string> 
 	return input.map((line) => line.split(separator));
 }
 
-export function readNumberMatrix(input: string[], separator = ''): Matrix<number> {
-	return input.map((line) => line.split(separator).map(Number));
+export function readNumberMatrix(
+	input: string[],
+	separator = '',
+	valueMapper: (value: string, position: Coords2D) => number = Number,
+): Matrix<number> {
+	return input.map((line, y) =>
+		line.split(separator).map((value, x) => valueMapper(value, [x, y])),
+	);
 }
