@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "day": "tsx ./utils/runner.ts",
-    "test": "tsx --test --watch"
+    "test": "tsx --test --watch",
+    "test:types": "tsc"
   },
   "devDependencies": {
-    "@types/node": "22.9.3",
+    "@types/node": "22.10.1",
     "prettier": "3.4.1",
     "tsx": "4.19.2",
     "typescript": "5.7.2"
