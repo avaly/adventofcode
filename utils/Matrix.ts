@@ -23,6 +23,10 @@ export default class Matrix<T> {
 		return this.data[y][x];
 	}
 
+	inBounds(pos: Coords2D): boolean {
+		return pos[0] >= 0 && pos[0] < this.sizeX && pos[1] >= 0 && pos[1] < this.sizeY;
+	}
+
 	print(itemWidth = 3) {
 		console.log(
 			' '.padStart(itemWidth + 2) +
