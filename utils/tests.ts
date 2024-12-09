@@ -20,7 +20,7 @@ export function cases<Input, Output>(
 	let index = 1;
 	for (const [input, output] of definitions) {
 		const title = JSON.stringify(input).substring(0, 20);
-		test(`${year}-${day} - #${index} - ${title}`, async () => {
+		test(`${year}-${day} - #${index} - ${title} = ${output}`, async () => {
 			await fn(input, output);
 		});
 		index++;
