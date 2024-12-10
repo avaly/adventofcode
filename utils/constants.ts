@@ -1,5 +1,7 @@
 import { Orientation, Vector2D } from './types';
 
+export const Orientations: Orientation[] = ['north', 'east', 'south', 'west'];
+
 export const OrientationRight: Record<Orientation, Orientation> = {
 	north: 'east',
 	east: 'south',

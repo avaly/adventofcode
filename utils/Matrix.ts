@@ -7,12 +7,29 @@ export default class Matrix<T> {
 		this.data = data;
 	}
 
+	*[Symbol.iterator]() {
+		for (let y = 0; y < this.sizeY; y++) {
+			for (let x = 0; x < this.sizeX; x++) {
+				yield {
+					position: [x, y] as Coords2D,
+					value: this.data[y][x],
+				};
+			}
+		}
+	}
+
 	get sizeY() {
 		return this.data.length;
 	}
 
 	get sizeX() {
 		return this.data[0]?.length || 0;
+	}
+
+	combineMatrix(other: Matrix<T>, operation: (a: T, b: T) => T): void {
+		for (const { position, value } of this) {
+			this.set(position, operation(value, other.get(position)));
+		}
 	}
 
 	get(coords: Coords2D): T {
@@ -54,6 +71,19 @@ export default class Matrix<T> {
 
 	static clone<T>(value: Matrix<T>): Matrix<T> {
 		return new Matrix(JSON.parse(JSON.stringify(value.data)));
+	}
+
+	static initialize<T>(sizeX: number, sizeY: number, value: T): Matrix<T> {
+		const data = [];
+
+		for (let y = 0; y < sizeY; y++) {
+			data.push([]);
+			for (let x = 0; x < sizeX; x++) {
+				data[y].push(value);
+			}
+		}
+
+		return new Matrix(data);
 	}
 
 	static toNumberMatrix(
