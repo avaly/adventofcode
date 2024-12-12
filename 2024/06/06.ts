@@ -1,7 +1,7 @@
 import { OrientationRight, OrientationVector2D } from '../../utils/constants';
 import Matrix from '../../utils/Matrix';
 import { Coords2D, Orientation } from '../../utils/types';
-import { addPositionVector2D } from '../../utils/utils';
+import { addCoordsVector2D } from '../../utils/utils';
 
 type Guard = {
 	orientation: Orientation;
@@ -40,7 +40,7 @@ function walkGuard(map: Matrix<number>, guard: Guard) {
 	do {
 		map.set(position, 1);
 
-		const newPos = addPositionVector2D(position, vector);
+		const newPos = addCoordsVector2D(position, vector);
 
 		if (newPos[0] < 0 || newPos[0] >= sizeX || newPos[1] < 0 || newPos[1] >= sizeY) {
 			break;
@@ -79,7 +79,7 @@ function checkObstacle(map: Matrix<number>, obstacle: Coords2D, guard: Guard): b
 
 		map.set(position, map.get(position) | orientationValue);
 
-		const newPos = addPositionVector2D(position, vector);
+		const newPos = addCoordsVector2D(position, vector);
 		if (newPos[0] < 0 || newPos[0] >= sizeX || newPos[1] < 0 || newPos[1] >= sizeY) {
 			break;
 		}
@@ -108,7 +108,7 @@ function findObstacles(map: Matrix<number>, guard: Guard): number {
 		map.set(position, map.get(position) | orientationValue);
 
 		if (
-			checkObstacle(Matrix.clone(map), addPositionVector2D(position, vector), {
+			checkObstacle(Matrix.clone(map), addCoordsVector2D(position, vector), {
 				orientation,
 				position,
 			})
@@ -116,7 +116,7 @@ function findObstacles(map: Matrix<number>, guard: Guard): number {
 			obstacles++;
 		}
 
-		const newPos = addPositionVector2D(position, vector);
+		const newPos = addCoordsVector2D(position, vector);
 		if (newPos[0] < 0 || newPos[0] >= sizeX || newPos[1] < 0 || newPos[1] >= sizeY) {
 			break;
 		}

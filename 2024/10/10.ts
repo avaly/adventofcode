@@ -1,7 +1,7 @@
-import { Orientations, OrientationVector2D } from '../../utils/constants';
+import { ORIENTATIONS, OrientationVector2D } from '../../utils/constants';
 import Matrix from '../../utils/Matrix';
 import { Coords2D } from '../../utils/types';
-import { addPositionVector2D } from '../../utils/utils';
+import { addCoordsVector2D } from '../../utils/utils';
 
 function parse(input: string[]): Matrix<number> {
 	return Matrix.toNumberMatrix(input, '', (value) => {
@@ -14,8 +14,8 @@ function walk(map: Matrix<number>, scores: Matrix<number>, start: Coords2D, allP
 
 	scores.set(start, allPaths ? scores.get(start) + 1 : 1);
 
-	for (const orientation of Orientations) {
-		const next = addPositionVector2D(start, OrientationVector2D[orientation]);
+	for (const orientation of ORIENTATIONS) {
+		const next = addCoordsVector2D(start, OrientationVector2D[orientation]);
 
 		if (map.inBounds(next) && height > 0 && map.get(next) === height - 1) {
 			walk(map, scores, next, allPaths);

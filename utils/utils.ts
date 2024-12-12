@@ -1,6 +1,6 @@
 import { Coords2D, Day, Program, Vector2D, VectorDelta } from './types';
 
-export function addPositionVector2D(pos: Coords2D, vector: Vector2D): Coords2D {
+export function addCoordsVector2D(pos: Coords2D, vector: Vector2D): Coords2D {
 	return [pos[0] + vector[0], pos[1] + vector[1]];
 }
 
@@ -36,4 +36,27 @@ export function negativeCoords2D(pos: Coords2D): Coords2D {
 
 export function negativeVector(vectorDelta: VectorDelta): VectorDelta {
 	return -vectorDelta as VectorDelta;
+}
+
+function edgePrinter(value: number): string {
+	return (
+		{
+			0: '.',
+			1: '┯',
+			2: '┨',
+			3: '┓',
+			4: '┷',
+			5: '=',
+			6: '┛',
+			7: '⊐',
+			8: '┠',
+			9: '┏',
+			10: '∥',
+			11: '⊓',
+			12: '┗',
+			13: '⊏',
+			14: '⊔',
+			15: '□',
+		}[value] || String(value)
+	);
 }

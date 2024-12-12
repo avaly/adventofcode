@@ -1,6 +1,13 @@
 import { Orientation, Vector2D } from './types';
 
-export const Orientations: Orientation[] = ['north', 'east', 'south', 'west'];
+export const ORIENTATION_BITS = {
+	north: 0,
+	east: 1,
+	south: 2,
+	west: 3,
+};
+
+export const ORIENTATIONS: Orientation[] = ['north', 'east', 'south', 'west'];
 
 export const OrientationRight: Record<Orientation, Orientation> = {
 	north: 'east',

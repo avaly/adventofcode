@@ -44,7 +44,7 @@ export default class Matrix<T> {
 		return pos[0] >= 0 && pos[0] < this.sizeX && pos[1] >= 0 && pos[1] < this.sizeY;
 	}
 
-	print(itemWidth = 3) {
+	print(itemWidth = 3, printer: (value: T) => string = String) {
 		console.log(
 			' '.padStart(itemWidth + 2) +
 				Array.from('x'.repeat(this.sizeX))
@@ -54,7 +54,7 @@ export default class Matrix<T> {
 		console.log('-'.repeat(itemWidth * (this.sizeX + 1) + 2));
 
 		for (const [index, line] of this.data.entries()) {
-			const items = line.map((item) => String(item).padStart(itemWidth)).join('');
+			const items = line.map((item) => printer(item).padStart(itemWidth)).join('');
 			console.log(`${String(index).padStart(itemWidth)} |${items}`);
 		}
 
