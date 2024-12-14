@@ -38,7 +38,11 @@ export function negativeVector(vectorDelta: VectorDelta): VectorDelta {
 	return -vectorDelta as VectorDelta;
 }
 
-function edgePrinter(value: number): string {
+export async function pause(delay: number): Promise<void> {
+	return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+export function edgePrinter(value: number): string {
 	return (
 		{
 			0: '.',
@@ -59,4 +63,24 @@ function edgePrinter(value: number): string {
 			15: '□',
 		}[value] || String(value)
 	);
+}
+
+export function wrapCoords2D(position: Coords2D, size: Coords2D): Coords2D {
+	let [x, y] = position;
+
+	if (x < 0) {
+		x += size[0];
+	}
+	if (x > size[0] - 1) {
+		x -= size[0];
+	}
+
+	if (y < 0) {
+		y += size[1];
+	}
+	if (y > size[1] - 1) {
+		y -= size[1];
+	}
+
+	return [x, y];
 }
