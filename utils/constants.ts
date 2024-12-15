@@ -1,5 +1,12 @@
 import { Orientation, Vector2D } from './types';
 
+export const MoveVector2D: Record<'^' | '>' | 'v' | '<', Vector2D> = {
+	'^': [0, -1],
+	'>': [1, 0],
+	v: [0, 1],
+	'<': [-1, 0],
+};
+
 export const ORIENTATION_BITS = {
 	north: 0,
 	east: 1,
