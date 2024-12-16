@@ -16,6 +16,13 @@ export const ORIENTATION_BITS = {
 
 export const ORIENTATIONS: Orientation[] = ['north', 'east', 'south', 'west'];
 
+export const OrientationLeft: Record<Orientation, Orientation> = {
+	north: 'west',
+	east: 'north',
+	south: 'east',
+	west: 'south',
+};
+
 export const OrientationRight: Record<Orientation, Orientation> = {
 	north: 'east',
 	east: 'south',

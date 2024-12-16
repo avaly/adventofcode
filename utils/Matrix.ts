@@ -1,3 +1,4 @@
+import Coords from './Coords';
 import { Coords2D } from './types';
 
 export default class Matrix<T> {
@@ -32,7 +33,10 @@ export default class Matrix<T> {
 		}
 	}
 
-	get(coords: Coords2D): T {
+	get(coords: Coords2D | Coords): T {
+		if (coords instanceof Coords) {
+			return this.data[coords.y][coords.x];
+		}
 		return this.data[coords[1]][coords[0]];
 	}
 
@@ -40,7 +44,10 @@ export default class Matrix<T> {
 		return this.data[y][x];
 	}
 
-	inBounds(pos: Coords2D): boolean {
+	inBounds(pos: Coords2D | Coords): boolean {
+		if (pos instanceof Coords) {
+			return pos.x >= 0 && pos.x < this.sizeX && pos.y >= 0 && pos.y < this.sizeY;
+		}
 		return pos[0] >= 0 && pos[0] < this.sizeX && pos[1] >= 0 && pos[1] < this.sizeY;
 	}
 
@@ -61,8 +68,12 @@ export default class Matrix<T> {
 		console.log('-'.repeat(itemWidth * (this.sizeX + 1) + 2));
 	}
 
-	set(coords: Coords2D, value: T): void {
-		this.data[coords[1]][coords[0]] = value;
+	set(coords: Coords2D | Coords, value: T): void {
+		if (coords instanceof Coords) {
+			this.data[coords.y][coords.x] = value;
+		} else {
+			this.data[coords[1]][coords[0]] = value;
+		}
 	}
 
 	setRaw(x: number, y: number, value: T): void {

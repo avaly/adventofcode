@@ -9,6 +9,13 @@ export default class Coords {
 		this.y = y;
 	}
 
+	static add(one: Coords, two: Coords | Vector2D) {
+		if (two instanceof Coords) {
+			return Coords.raw(one.x + two.x, one.y + two.y);
+		}
+		return Coords.raw(one.x + two[0], one.y + two[1]);
+	}
+
 	static from([x, y]: [number, number]) {
 		return new Coords(x, y);
 	}
@@ -27,6 +34,10 @@ export default class Coords {
 		this.y += other.y;
 	}
 
+	equal(other: Coords): boolean {
+		return this.x === other.x && this.y === other.y;
+	}
+
 	minus(other: Coords) {
 		this.x -= other.x;
 		this.y -= other.y;
@@ -35,6 +46,10 @@ export default class Coords {
 	negative() {
 		this.x = -this.x;
 		this.y = -this.y;
+	}
+
+	toString() {
+		return `${this.x}x${this.y}`;
 	}
 
 	wrap(bounds: Coords) {
