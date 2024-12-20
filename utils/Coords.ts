@@ -1,6 +1,6 @@
 import { ORIENTATIONS, OrientationVector2D } from './constants';
 import Matrix from './Matrix';
-import { Vector2D } from './types';
+import { Orientation, Vector2D } from './types';
 
 export default class Coords {
 	x: number;
@@ -61,10 +61,10 @@ export default class Coords {
 		this.y = -this.y;
 	}
 
-	neighbors(matrix?: Matrix<unknown>): Coords[] {
-		return ORIENTATIONS.map((orientation) =>
-			Coords.add(this, OrientationVector2D[orientation]),
-		).filter((neighbor) => (matrix ? matrix.inBounds(neighbor) : true));
+	neighbors(matrix?: Matrix<unknown>): (readonly [Coords, Orientation])[] {
+		return ORIENTATIONS.map(
+			(orientation) => [Coords.add(this, OrientationVector2D[orientation]), orientation] as const,
+		).filter(([neighbor]) => (matrix ? matrix.inBounds(neighbor) : true));
 	}
 
 	toString() {
