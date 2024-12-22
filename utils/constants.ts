@@ -1,6 +1,6 @@
-import { Orientation, Vector2D } from './types';
+import { Move, Orientation, Vector2D } from './types';
 
-export const MoveVector2D: Record<'^' | '>' | 'v' | '<', Vector2D> = {
+export const MoveVector2D: Record<Move, Vector2D> = {
 	'^': [0, -1],
 	'>': [1, 0],
 	v: [0, 1],
@@ -14,7 +14,7 @@ export const ORIENTATION_BITS = {
 	west: 3,
 };
 
-export const ORIENTATIONS: Orientation[] = ['north', 'east', 'south', 'west'];
+export const ORIENTATIONS: Orientation[] = ['east', 'west', 'north', 'south'];
 
 export const OrientationLeft: Record<Orientation, Orientation> = {
 	north: 'west',
@@ -28,6 +28,13 @@ export const OrientationRight: Record<Orientation, Orientation> = {
 	east: 'south',
 	south: 'west',
 	west: 'north',
+};
+
+export const OrientationMove: Record<Orientation, Move> = {
+	north: '^',
+	east: '>',
+	south: 'v',
+	west: '<',
 };
 
 export const OrientationVector2D: Record<Orientation, Vector2D> = {

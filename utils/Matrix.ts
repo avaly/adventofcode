@@ -12,6 +12,7 @@ export default class Matrix<T> {
 		for (let y = 0; y < this.sizeY; y++) {
 			for (let x = 0; x < this.sizeX; x++) {
 				yield {
+					coords: Coords.from([x, y]),
 					position: [x, y] as Coords2D,
 					value: this.data[y][x],
 				};
