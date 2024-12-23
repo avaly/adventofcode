@@ -1,0 +1,9 @@
+de-cg
+ka-co
+ta-co
+de-co
+ta-ka
+de-ta
+ka-de
+de-xy
+xy-cg
