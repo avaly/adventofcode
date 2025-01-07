@@ -14,7 +14,7 @@ export const ORIENTATION_BITS = {
 	west: 3,
 };
 
-export const ORIENTATIONS: Orientation[] = ['east', 'west', 'north', 'south'];
+export const ORIENTATIONS: Orientation[] = ['north', 'east', 'south', 'west'];
 
 export const OrientationLeft: Record<Orientation, Orientation> = {
 	north: 'west',

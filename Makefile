@@ -8,6 +8,19 @@ ARGS = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
 # https://www.gnu.org/software/make/manual/make.html#Options-Summary
 MAKEFLAGS += --silent
 
+.PHONY: 2016
+2016:
+	@cd 2016 && pnpm run day 2016 $(call ARGS)
+
+2016-test:
+	@cd 2016 && pnpm test 2016/$(call ARGS)/*.test.ts
+
+2016-test-all:
+	@cd 2016 && pnpm test 2016/**/*.test.ts
+
+2016-prepare:
+	YEAR=2016 make prepare $(call ARGS)
+
 .PHONY: 2023
 2023:
 	@cd 2023 && cargo build --quiet && ./target/debug/aoc $(call ARGS)
@@ -39,6 +52,14 @@ MAKEFLAGS += --silent
 	sed -i "s/00/$(call ARGS)/" 2024/$(call ARGS)/$(call ARGS).test.ts
 	touch 2024/$(call ARGS)/input.txt
 	touch 2024/$(call ARGS)/sample.txt
+
+prepare:
+	mkdir -p $(YEAR)/$(call ARGS) || true
+	cp utils/day-template/00.ts $(YEAR)/$(call ARGS)/$(call ARGS).ts
+	cp utils/day-template/00.test.ts $(YEAR)/$(call ARGS)/$(call ARGS).test.ts
+	sed -i "s/00/$(call ARGS)/" $(YEAR)/$(call ARGS)/$(call ARGS).test.ts
+	touch $(YEAR)/$(call ARGS)/input.txt
+	touch $(YEAR)/$(call ARGS)/sample.txt
 
 pretty:
 	prettier **/*.{cjs,js,mjs,ts} --write

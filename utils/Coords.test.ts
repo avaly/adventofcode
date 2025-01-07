@@ -41,20 +41,32 @@ describe('Coords', () => {
 
 	test('neighbors', () => {
 		for (const [pos, expected] of [
-			[Coords.raw(0, 0), '0x-1,1x0,0x1,-1x0'],
-			[Coords.raw(1, 2), '1x1,2x2,1x3,0x2'],
+			[Coords.raw(0, 0), '0x-1:north,1x0:east,0x1:south,-1x0:west'],
+			[Coords.raw(1, 2), '1x1:north,2x2:east,1x3:south,0x2:west'],
 		] as const) {
-			strictEqual(pos.neighbors().join(','), expected);
+			strictEqual(
+				pos
+					.neighbors()
+					.map(([location, orientation]) => `${location}:${orientation}`)
+					.join(','),
+				expected,
+			);
 		}
 
 		const matrix = Matrix.initialize(3, 3, 0);
 
 		for (const [pos, expected] of [
-			[Coords.raw(0, 0), '1x0,0x1'],
-			[Coords.raw(1, 1), '1x0,2x1,1x2,0x1'],
-			[Coords.raw(2, 2), '2x1,1x2'],
+			[Coords.raw(0, 0), '1x0:east,0x1:south'],
+			[Coords.raw(1, 1), '1x0:north,2x1:east,1x2:south,0x1:west'],
+			[Coords.raw(2, 2), '2x1:north,1x2:west'],
 		] as const) {
-			strictEqual(pos.neighbors(matrix).join(','), expected);
+			strictEqual(
+				pos
+					.neighbors(matrix)
+					.map(([location, orientation]) => `${location}:${orientation}`)
+					.join(','),
+				expected,
+			);
 		}
 	});
 

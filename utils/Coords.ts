@@ -37,6 +37,10 @@ export default class Coords {
 		return new Coords(x, y);
 	}
 
+	get manhattanDistance(): number {
+		return Math.abs(this.x) + Math.abs(this.y);
+	}
+
 	add(other: Coords | Vector2D) {
 		if (other instanceof Coords) {
 			this.x += other.x;
