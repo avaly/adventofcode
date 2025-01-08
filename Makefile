@@ -57,6 +57,7 @@ prepare:
 	mkdir -p $(YEAR)/$(call ARGS) || true
 	cp utils/day-template/00.ts $(YEAR)/$(call ARGS)/$(call ARGS).ts
 	cp utils/day-template/00.test.ts $(YEAR)/$(call ARGS)/$(call ARGS).test.ts
+	sed -i "s/0000/$(YEAR)/" $(YEAR)/$(call ARGS)/$(call ARGS).test.ts
 	sed -i "s/00/$(call ARGS)/" $(YEAR)/$(call ARGS)/$(call ARGS).test.ts
 	touch $(YEAR)/$(call ARGS)/input.txt
 	touch $(YEAR)/$(call ARGS)/sample.txt

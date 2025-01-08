@@ -1,4 +1,4 @@
-import { Move, Orientation, Vector2D } from './types';
+import { Move, MoveLetter, Orientation, Vector2D } from './types';
 
 export const MoveVector2D: Record<Move, Vector2D> = {
 	'^': [0, -1],
@@ -35,6 +35,13 @@ export const OrientationMove: Record<Orientation, Move> = {
 	east: '>',
 	south: 'v',
 	west: '<',
+};
+
+export const MoveLetterOrientation: Record<MoveLetter, Orientation> = {
+	U: 'north',
+	D: 'south',
+	L: 'west',
+	R: 'east',
 };
 
 export const OrientationVector2D: Record<Orientation, Vector2D> = {

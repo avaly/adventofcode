@@ -1,4 +1,6 @@
-function parse(input: string[]): number[] {
+type Data = unknown;
+
+function parse(input: string[]): Data {
 	const data: number[] = [];
 
 	for (const line of input) {
@@ -9,18 +11,14 @@ function parse(input: string[]): number[] {
 	return data;
 }
 
+function solve(data: Data, part2: boolean = false): number {
+	return 0;
+}
+
 export function part1(input: string[]): number {
-	let result = 0;
-
-	const data = parse(input);
-
-	return result;
+	return solve(parse(input));
 }
 
 export function part2(input: string[]): number {
-	let result = 0;
-
-	const data = parse(input);
-
-	return result;
+	return solve(parse(input), true);
 }

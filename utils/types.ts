@@ -16,4 +16,5 @@ export type Vector2D = [VectorDelta, VectorDelta];
 export type Vector3D = [VectorDelta, VectorDelta, VectorDelta];
 
 export type Move = '^' | '>' | 'v' | '<';
+export type MoveLetter = 'U' | 'D' | 'L' | 'R';
 export type Orientation = 'north' | 'east' | 'south' | 'west';
