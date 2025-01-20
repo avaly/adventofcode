@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "day": "tsx ./utils/runner.ts",
-    "test": "tsx --test --watch",
+    "test": "NODE_ENV=test tsx --test --watch",
     "test:types": "tsc"
   },
   "devDependencies": {
