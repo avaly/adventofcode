@@ -1,6 +1,11 @@
 import Coords from './Coords';
 import { Coords2D } from './types';
 
+export const NUMBER_PRINTER = (value: number) =>
+	value === WALL ? '#' : value === 0 ? '.' : String(value);
+
+export const WALL = Infinity;
+
 export default class Matrix<T> {
 	data: T[][];
 
@@ -112,6 +117,36 @@ export default class Matrix<T> {
 		}
 
 		return new Matrix(data);
+	}
+
+	static shortestPaths(map: Matrix<number>, start: Coords, wall = WALL) {
+		const queue: [Coords, number][] = [[start, 1]];
+
+		while (queue.length) {
+			const [current, cost] = queue.shift();
+
+			if (!map.inBounds(current) || map.get(current) === wall) {
+				continue;
+			}
+
+			map.set(current, cost);
+
+			for (const [neighbor] of current.neighbors(map)) {
+				if (neighbor.equal(start)) {
+					continue;
+				}
+
+				const value = map.get(neighbor);
+				if (value === WALL) {
+					continue;
+				}
+				if (value > 0 && value <= cost + 1) {
+					continue;
+				}
+
+				queue.push([neighbor, cost + 1]);
+			}
+		}
 	}
 
 	static toNumberMatrix(
