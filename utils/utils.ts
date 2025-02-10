@@ -1,3 +1,4 @@
+import { createHash } from 'crypto';
 import { Coords2D, Day, Program, Vector2D, VectorDelta } from './types';
 
 export function addCoordsVector2D(pos: Coords2D, vector: Vector2D): Coords2D {
@@ -28,6 +29,10 @@ export async function loadProgram([year, day]: Day): Promise<Program> {
 	const implementation = await import(`../${year}/${day}/${day}.ts`);
 
 	return implementation;
+}
+
+export function md5(value: string): string {
+	return createHash('md5').update(value).digest('hex');
 }
 
 export function negativeCoords2D(pos: Coords2D): Coords2D {

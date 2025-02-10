@@ -1,13 +1,9 @@
-import { createHash } from 'crypto';
+import { md5 } from '../../utils/utils';
 
 type Data = string;
 
 function parse(input: string[], part2: boolean = false): Data {
 	return input[0];
-}
-
-function md5(value: string): string {
-	return createHash('md5').update(value).digest('hex');
 }
 
 function solve(data: Data, part2: boolean = false): string {
