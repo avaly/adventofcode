@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
-import { loadProgram } from './utils';
+import { loadProgram } from './utils.ts';
 
 if (process.argv.length < 4) {
-	console.log('Usage: tsx ./utils/runner.ts <YEAR> <NUMBER>');
+	console.log('Usage: node ./utils/runner.ts <YEAR> <NUMBER>');
 	process.exit(1);
 }
 

@@ -1,8 +1,8 @@
 import { deepStrictEqual, strictEqual } from 'node:assert';
 import test, { beforeEach, describe } from 'node:test';
-import Matrix, { WALL } from './Matrix';
-import Coords from './Coords';
-import { Coords2D } from './types';
+import Matrix, { WALL } from './Matrix.ts';
+import Coords from './Coords.ts';
+import type { Coords2D } from './types.ts';
 
 describe('Matrix', () => {
 	let matrix: Matrix<number>;

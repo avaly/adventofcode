@@ -1,6 +1,6 @@
 import { strictEqual } from 'node:assert';
 
-import { cases, sample, testsFor } from '../../utils/tests';
+import { cases, sample, testsFor } from '../../utils/tests.ts';
 
 testsFor(['0000', '00'], (day, { part1, part2 }) => {
 	// prettier-ignore

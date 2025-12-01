@@ -1,6 +1,6 @@
 import { deepStrictEqual, ok } from 'node:assert';
 import test, { describe } from 'node:test';
-import { generateAllCombinations, generateUniqueCombinations } from './generators';
+import { generateAllCombinations, generateUniqueCombinations } from './generators.ts';
 import { isGeneratorObject } from 'node:util/types';
 
 describe('generators', () => {

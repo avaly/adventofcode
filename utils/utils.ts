@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { Coords2D, Day, Program, Vector2D, VectorDelta } from './types';
+import type { Coords2D, Day, Program, Vector2D, VectorDelta } from './types.ts';
 
 export function addCoordsVector2D(pos: Coords2D, vector: Vector2D): Coords2D {
 	return [pos[0] + vector[0], pos[1] + vector[1]];

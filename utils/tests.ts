@@ -1,6 +1,6 @@
 import test from 'node:test';
-import { loadProgram } from './utils';
-import { Day, Program } from './types';
+import { loadProgram } from './utils.ts';
+import type { Day, Program } from './types.ts';
 import { readFileSync } from 'node:fs';
 
 export async function testsFor(

@@ -1,5 +1,5 @@
 import Coords from './Coords';
-import { Coords2D } from './types';
+import type { Coords2D } from './types.ts';
 
 export const NUMBER_PRINTER = (value: number) =>
 	value === WALL ? '#' : value === 0 ? '.' : String(value);

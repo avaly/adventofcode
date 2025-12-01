@@ -3,17 +3,13 @@
   "version": "2024.0.0",
   "type": "module",
   "scripts": {
-    "day": "tsx ./utils/runner.ts",
-    "test": "NODE_ENV=test tsx --test --watch",
+    "day": "node ./utils/runner.ts",
+    "test": "NODE_ENV=test node --test --watch",
     "test:types": "tsc"
   },
   "devDependencies": {
-    "@types/node": "22.10.1",
-    "prettier": "3.4.1",
-    "tsx": "4.19.2",
-    "typescript": "5.7.2"
-  },
-  "volta": {
-    "node": "22.11.0"
+    "@types/node": "24.10.1",
+    "prettier": "3.7.3",
+    "typescript": "5.9.3"
   }
 }

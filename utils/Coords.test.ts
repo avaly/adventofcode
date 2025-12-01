@@ -1,7 +1,7 @@
 import { strictEqual } from 'node:assert';
 import test, { beforeEach, describe } from 'node:test';
-import Coords from './Coords';
-import Matrix from './Matrix';
+import Coords from './Coords.ts';
+import Matrix from './Matrix.ts';
 
 describe('Coords', () => {
 	var pos: Coords;

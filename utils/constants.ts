@@ -1,4 +1,4 @@
-import { Move, MoveLetter, Orientation, Vector2D } from './types';
+import type { Move, MoveLetter, Orientation, Vector2D } from './types.ts';
 
 export const MoveVector2D: Record<Move, Vector2D> = {
 	'^': [0, -1],

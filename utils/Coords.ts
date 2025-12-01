@@ -1,6 +1,6 @@
-import { ORIENTATIONS, OrientationVector2D } from './constants';
-import Matrix from './Matrix';
-import { Orientation, Vector2D } from './types';
+import { ORIENTATIONS, OrientationVector2D } from './constants.ts';
+import Matrix from './Matrix.ts';
+import type { Orientation, Vector2D } from './types.ts';
 
 export default class Coords {
 	x: number;
