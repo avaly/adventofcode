@@ -16,13 +16,14 @@ export function cases<Input, Output>(
 	[year, day]: Day,
 	definitions: [Input, Output][],
 	fn: (input: Input, output: Output) => void,
+	title?: string,
 ) {
 	let index = 1;
 	for (const [input, output] of definitions) {
 		const titleInput = JSON.stringify(input).substring(0, 20);
 		const titleOutput = JSON.stringify(output).substring(0, 20);
 
-		test(`${year}-${day} - #${index} - ${titleInput} = ${titleOutput}`, async () => {
+		test(`${year}-${day} -${title ? ` ${title}` : ''} #${index} - ${titleInput} = ${titleOutput}`, async () => {
 			await fn(input, output);
 		});
 		index++;

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
     "erasableSyntaxOnly": true,
     "module": "ESNext",
     "noEmit": true,
