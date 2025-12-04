@@ -1,6 +1,11 @@
-import { ORIENTATIONS, OrientationVector2D } from './constants.ts';
+import {
+	OrientationAllVector2D,
+	ORIENTATIONS,
+	ORIENTATIONS_ALL,
+	OrientationVector2D,
+} from './constants.ts';
 import Matrix from './Matrix.ts';
-import type { Orientation, Vector2D } from './types.ts';
+import type { Orientation, OrientationAll, Vector2D } from './types.ts';
 
 export default class Coords {
 	x: number;
@@ -65,7 +70,14 @@ export default class Coords {
 		this.y = -this.y;
 	}
 
-	neighbors(matrix?: Matrix<unknown>): (readonly [Coords, Orientation])[] {
+	neighborsAll(matrix?: Matrix<unknown>): (readonly [Coords, OrientationAll])[] {
+		return ORIENTATIONS_ALL.map(
+			(orientation) =>
+				[Coords.add(this, OrientationAllVector2D[orientation]), orientation] as const,
+		).filter(([neighbor]) => (matrix ? matrix.inBounds(neighbor) : true));
+	}
+
+	neighborsDirect(matrix?: Matrix<unknown>): (readonly [Coords, Orientation])[] {
 		return ORIENTATIONS.map(
 			(orientation) => [Coords.add(this, OrientationVector2D[orientation]), orientation] as const,
 		).filter(([neighbor]) => (matrix ? matrix.inBounds(neighbor) : true));

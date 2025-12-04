@@ -39,14 +39,54 @@ describe('Coords', () => {
 		strictEqual(newPos.y, -3);
 	});
 
-	test('neighbors', () => {
+	test('neighborsAll', () => {
+		for (const [pos, expected] of [
+			[
+				Coords.raw(0, 0),
+				'-1x-1:north-west,0x-1:north,1x-1:north-east,1x0:east,1x1:south-east,0x1:south,-1x1:south-west,-1x0:west',
+			],
+			[
+				Coords.raw(1, 2),
+				'0x1:north-west,1x1:north,2x1:north-east,2x2:east,2x3:south-east,1x3:south,0x3:south-west,0x2:west',
+			],
+		] as const) {
+			strictEqual(
+				pos
+					.neighborsAll()
+					.map(([location, orientation]) => `${location}:${orientation}`)
+					.join(','),
+				expected,
+			);
+		}
+
+		const matrix = Matrix.initialize(3, 3, 0);
+
+		for (const [pos, expected] of [
+			[Coords.raw(0, 0), '1x0:east,1x1:south-east,0x1:south'],
+			[
+				Coords.raw(1, 1),
+				'0x0:north-west,1x0:north,2x0:north-east,2x1:east,2x2:south-east,1x2:south,0x2:south-west,0x1:west',
+			],
+			[Coords.raw(2, 2), '1x1:north-west,2x1:north,1x2:west'],
+		] as const) {
+			strictEqual(
+				pos
+					.neighborsAll(matrix)
+					.map(([location, orientation]) => `${location}:${orientation}`)
+					.join(','),
+				expected,
+			);
+		}
+	});
+
+	test('neighborsDirect', () => {
 		for (const [pos, expected] of [
 			[Coords.raw(0, 0), '0x-1:north,1x0:east,0x1:south,-1x0:west'],
 			[Coords.raw(1, 2), '1x1:north,2x2:east,1x3:south,0x2:west'],
 		] as const) {
 			strictEqual(
 				pos
-					.neighbors()
+					.neighborsDirect()
 					.map(([location, orientation]) => `${location}:${orientation}`)
 					.join(','),
 				expected,
@@ -62,7 +102,7 @@ describe('Coords', () => {
 		] as const) {
 			strictEqual(
 				pos
-					.neighbors(matrix)
+					.neighborsDirect(matrix)
 					.map(([location, orientation]) => `${location}:${orientation}`)
 					.join(','),
 				expected,

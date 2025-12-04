@@ -1,4 +1,4 @@
-import type { Move, MoveLetter, Orientation, Vector2D } from './types.ts';
+import type { Move, MoveLetter, Orientation, OrientationAll, Vector2D } from './types.ts';
 
 export const MoveVector2D: Record<Move, Vector2D> = {
 	'^': [0, -1],
@@ -15,6 +15,17 @@ export const ORIENTATION_BITS = {
 };
 
 export const ORIENTATIONS: Orientation[] = ['north', 'east', 'south', 'west'];
+
+export const ORIENTATIONS_ALL: OrientationAll[] = [
+	'north-west',
+	'north',
+	'north-east',
+	'east',
+	'south-east',
+	'south',
+	'south-west',
+	'west',
+];
 
 export const OrientationLeft: Record<Orientation, Orientation> = {
 	north: 'west',
@@ -42,6 +53,17 @@ export const MoveLetterOrientation: Record<MoveLetter, Orientation> = {
 	D: 'south',
 	L: 'west',
 	R: 'east',
+};
+
+export const OrientationAllVector2D: Record<OrientationAll, Vector2D> = {
+	'north-west': [-1, -1],
+	north: [0, -1],
+	'north-east': [1, -1],
+	east: [1, 0],
+	'south-east': [1, 1],
+	south: [0, 1],
+	'south-west': [-1, 1],
+	west: [-1, 0],
 };
 
 export const OrientationVector2D: Record<Orientation, Vector2D> = {

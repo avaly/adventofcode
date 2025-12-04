@@ -1,4 +1,4 @@
-import Coords from './Coords';
+import Coords from './Coords.ts';
 import type { Coords2D } from './types.ts';
 
 export const NUMBER_PRINTER = (value: number) =>
@@ -131,7 +131,7 @@ export default class Matrix<T> {
 
 			map.set(current, cost);
 
-			for (const [neighbor] of current.neighbors(map)) {
+			for (const [neighbor] of current.neighborsDirect(map)) {
 				if (neighbor.equal(start)) {
 					continue;
 				}

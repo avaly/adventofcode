@@ -41,7 +41,7 @@ function findPath(data: Data) {
 
 		map.set(current, cost);
 
-		for (const [neighbor] of current.neighbors(map)) {
+		for (const [neighbor] of current.neighborsDirect(map)) {
 			if (neighbor.equal(start)) {
 				continue;
 			}
@@ -80,7 +80,7 @@ function findLongCheats(data: Data, start: Coords, maxLength: number): Cheat[] {
 		}
 		visited.add(`${current}`);
 
-		for (const [neighbor] of current.neighbors(map)) {
+		for (const [neighbor] of current.neighborsDirect(map)) {
 			if (neighbor.equal(start)) {
 				continue;
 			}
@@ -128,7 +128,7 @@ function findAllCheats(data: Data, maxLength: number): number {
 
 		const currentCost = map.get(current);
 
-		for (const [neighbor] of current.neighbors(map)) {
+		for (const [neighbor] of current.neighborsDirect(map)) {
 			if (neighbor.equal(start)) {
 				continue;
 			}

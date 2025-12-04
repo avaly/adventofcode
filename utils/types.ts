@@ -18,3 +18,12 @@ export type Vector3D = [VectorDelta, VectorDelta, VectorDelta];
 export type Move = '^' | '>' | 'v' | '<';
 export type MoveLetter = 'U' | 'D' | 'L' | 'R';
 export type Orientation = 'north' | 'east' | 'south' | 'west';
+export type OrientationAll =
+	| 'north-west'
+	| 'north'
+	| 'north-east'
+	| 'east'
+	| 'south-east'
+	| 'south'
+	| 'south-west'
+	| 'west';

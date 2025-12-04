@@ -96,7 +96,7 @@ function findPath(keypad: Matrix<string>, start: Coords, end: Coords): Seq[] {
 			}
 		}
 
-		for (const [neighbor, orientation] of current.neighbors(keypad)) {
+		for (const [neighbor, orientation] of current.neighborsDirect(keypad)) {
 			if (neighbor.equal(start)) {
 				continue;
 			}
