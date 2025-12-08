@@ -6,8 +6,8 @@ export type Day = [string, string];
 export type Matrix<T> = T[][];
 
 export type Program<Input = string[], Output = number> = {
-	part1: (input: Input) => Output | Promise<Output>;
-	part2: (input: Input) => Output | Promise<Output>;
+	part1: (input: Input, ...args: unknown[]) => Output | Promise<Output>;
+	part2: (input: Input, ...args: unknown[]) => Output | Promise<Output>;
 };
 
 export type VectorDelta = -1 | 0 | 1;
