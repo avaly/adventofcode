@@ -86,6 +86,19 @@ export default class Matrix<T> {
 		}
 	}
 
+	rotateRight(): Matrix<T> {
+		const data: T[][] = [];
+
+		for (let x = 0; x < this.sizeX; x++) {
+			data.push([]);
+			for (let y = this.sizeY - 1; y >= 0; y--) {
+				data[x].push(this.data[y][x]);
+			}
+		}
+
+		return new Matrix(data);
+	}
+
 	row(y: number): T[] {
 		return [...this.data[y]];
 	}

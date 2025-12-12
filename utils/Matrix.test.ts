@@ -109,6 +109,20 @@ describe('Matrix', () => {
 		]);
 	});
 
+	test('rotateRight', () => {
+		const rotated = matrix.rotateRight();
+
+		deepStrictEqual(
+			rotated,
+			new Matrix([
+				[0, 0, 1],
+				[0, 1, 0],
+				[1, 0, 0],
+				[0, 0, 0],
+			]),
+		);
+	});
+
 	test('shortest paths', () => {
 		// prettier-ignore
 		matrix = Matrix.toNumberMatrix([
