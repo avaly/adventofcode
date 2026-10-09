@@ -37,7 +37,7 @@ function parse(input: string[]): Data {
 function pathsBetweenFast(data: Data, from: number, to: number): number {
 	const { nodes, wires } = data;
 	const size = nodes.length;
-	const adjacency = Array.from({ length: size }, () => []);
+	const adjacency = Array.from({ length: size }, () => [] as number[]);
 	const inDegree = new Array(size).fill(0);
 
 	for (const [node, outputs] of Object.entries(wires)) {
@@ -49,7 +49,7 @@ function pathsBetweenFast(data: Data, from: number, to: number): number {
 		}
 	}
 
-	const queue = [];
+	const queue: number[] = [];
 	for (let i = 0; i < size; i++) {
 		if (inDegree[i] === 0) {
 			queue.push(i);
@@ -62,10 +62,12 @@ function pathsBetweenFast(data: Data, from: number, to: number): number {
 	while (queue.length > 0) {
 		const node = queue.shift();
 
-		for (const other of adjacency[node]) {
-			paths[other] += paths[node];
-			if (--inDegree[other] === 0) {
-				queue.push(other);
+		if (node) {
+			for (const other of adjacency[node]) {
+				paths[other] += paths[node];
+				if (--inDegree[other] === 0) {
+					queue.push(other);
+				}
 			}
 		}
 	}

@@ -7,6 +7,7 @@
     "noEmit": true,
     "target": "ESNext",
     "skipLibCheck": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "types": ["node"]
   }
 }

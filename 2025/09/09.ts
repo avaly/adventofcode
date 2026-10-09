@@ -64,6 +64,8 @@ function solve(data: Data, part2: boolean = false): number {
 			return area;
 		}
 	}
+
+	return 0;
 }
 
 export function part1(input: string[]): number {

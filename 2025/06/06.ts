@@ -66,6 +66,8 @@ function solveProblem([operation, values]: Problem): number {
 				return acc * value;
 			case '/':
 				return acc / value;
+			default:
+				return 0;
 		}
 	}, values[0]);
 }
