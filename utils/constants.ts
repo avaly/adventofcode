@@ -48,6 +48,13 @@ export const OrientationMove: Record<Orientation, Move> = {
 	west: '<',
 };
 
+export const OrientationMoveLetter: Record<Orientation, MoveLetter> = {
+	north: 'U',
+	east: 'R',
+	south: 'D',
+	west: 'L',
+};
+
 export const MoveLetterOrientation: Record<MoveLetter, Orientation> = {
 	U: 'north',
 	D: 'south',
