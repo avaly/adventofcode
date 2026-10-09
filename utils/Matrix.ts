@@ -115,6 +115,10 @@ export default class Matrix<T> {
 		this.data[y][x] = value;
 	}
 
+	swapRows(y1: number, y2: number): void {
+		[this.data[y1], this.data[y2]] = [this.data[y2], this.data[y1]];
+	}
+
 	static clone<T>(value: Matrix<T>): Matrix<T> {
 		return new Matrix(JSON.parse(JSON.stringify(value.data)));
 	}
@@ -123,7 +127,7 @@ export default class Matrix<T> {
 		const data = [];
 
 		for (let y = 0; y < sizeY; y++) {
-			data.push([]);
+			data.push([] as Array<T>);
 			for (let x = 0; x < sizeX; x++) {
 				data[y].push(value);
 			}
@@ -136,7 +140,7 @@ export default class Matrix<T> {
 		const queue: [Coords, number][] = [[start, 1]];
 
 		while (queue.length) {
-			const [current, cost] = queue.shift();
+			const [current, cost] = queue.shift() as [Coords, number];
 
 			if (!map.inBounds(current) || map.get(current) === wall) {
 				continue;

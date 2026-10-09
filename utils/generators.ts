@@ -25,6 +25,32 @@ export function* generateAllCombinations<T>(
 	}
 }
 
+export function* generateRepeatingCombinations<T>(
+	items: T[],
+	counts: [number, number],
+	selected: number[] = [],
+	isValid?: (partial: T[], candidate: T) => boolean,
+): IterableIterator<T[]> {
+	if (selected.length >= counts[0] && selected.length <= counts[1]) {
+		yield selected.map((index) => items[index]);
+		if (selected.length === counts[1]) {
+			return;
+		}
+	}
+
+	for (let i = 0; i < items.length; i++) {
+		if (
+			!isValid ||
+			isValid(
+				selected.map((index) => items[index]),
+				items[i],
+			)
+		) {
+			yield* generateRepeatingCombinations(items, counts, [...selected, i], isValid);
+		}
+	}
+}
+
 export function* generateUniqueCombinations<T>(
 	items: T[],
 	counts: [number, number],

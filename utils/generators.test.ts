@@ -1,6 +1,10 @@
 import { deepStrictEqual, ok } from 'node:assert';
 import test, { describe } from 'node:test';
-import { generateAllCombinations, generateUniqueCombinations } from './generators.ts';
+import {
+	generateAllCombinations,
+	generateRepeatingCombinations,
+	generateUniqueCombinations,
+} from './generators.ts';
 import { isGeneratorObject } from 'node:util/types';
 
 describe('generators', () => {
@@ -82,6 +86,30 @@ describe('generators', () => {
 			['c', 'a'],
 			['c', 'b'],
 		]);
+	});
+
+	test('repeating combinations', () => {
+		const gen = generateRepeatingCombinations(['a', 'b'], [2, 2]);
+
+		ok(isGeneratorObject(gen));
+
+		deepStrictEqual(gen.next().value, ['a', 'a']);
+		deepStrictEqual(gen.next().value, ['a', 'b']);
+		deepStrictEqual(gen.next().value, ['b', 'a']);
+		deepStrictEqual(gen.next().value, ['b', 'b']);
+
+		const result: string[][] = [];
+
+		for (const combo of generateRepeatingCombinations(
+			['a', 'b'],
+			[1, 2],
+			[],
+			(partial, candidate) => partial.length === 0 || partial[0] !== candidate,
+		)) {
+			result.push(combo);
+		}
+
+		deepStrictEqual(result, [['a'], ['a', 'b'], ['b'], ['b', 'a']]);
 	});
 
 	test('unique combinations', () => {
